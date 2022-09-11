@@ -71,3 +71,8 @@ settings.json
 *.exe
 *.out
 *.app
+
+
+# Python WIP
+scripts
+.venv
