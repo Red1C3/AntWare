@@ -30,6 +30,7 @@ namespace aw
 
         GameObject(std::shared_ptr<Mesh> mesh, Material material, GameObject *parent = nullptr, bool isStatic = false, int type = 1);
         GameObject(Mesh mesh, Material material, GameObject *parent = nullptr, bool isStatic = false, int type = 1);
+        virtual ~GameObject();
         GameObject *getParent();
         void setParent(GameObject *parent);
         std::shared_ptr<Mesh> getMesh();
