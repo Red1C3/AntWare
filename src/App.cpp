@@ -13,6 +13,7 @@ bool App::init(int argc, char **argv)
     srand(time(nullptr));
     readSettingsFile();
     WINDOW.init(settings.resHeight, settings.resWidth);
+    return true;
     RENDERER.init();
 
     MENU.init(settings.levels, settings.levelsLabels);
@@ -24,7 +25,7 @@ bool App::init(int argc, char **argv)
     }
     HUD.setStatus(LOADING);
     HUD.draw();
-    WINDOW.internal.display();
+//FIXME    WINDOW.internal.display();
 
     music.openFromFile(settings.levelsMusic[i]);
     music.setVolume(60);
@@ -64,7 +65,7 @@ void App::loop()
     while (true)
     {
         sf::Event event;
-        while (WINDOW.internal.pollEvent(event))
+       /* while (WINDOW.internal.pollEvent(event))
         {
             switch (event.type)
             {
@@ -127,7 +128,7 @@ void App::loop()
             default:
                 break;
             }
-        }
+        }*/ //FIXME
         if (gameStatus == ONGOING)
         {
             PHYSICS.apply(currentScene, deltaTime);

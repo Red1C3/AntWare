@@ -61,7 +61,7 @@ void Renderer::renderScene(Scene *scene)
 
     HUD.draw();
     assert(glGetError() == 0);
-    WINDOW.internal.display();
+    //FIXME WINDOW.internal.display();
 }
 GLuint Renderer::getMainShader()
 {

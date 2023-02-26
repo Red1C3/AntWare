@@ -4,7 +4,7 @@ using namespace glm;
 float Camera::aspectRatio;
 Camera::Camera(float FOV) : FOV(FOV)
 {
-    aspectRatio = (float)WINDOW.internal.getSize().x / (float)WINDOW.internal.getSize().y;
+//FIXME    aspectRatio = (float)WINDOW.internal.getSize().x / (float)WINDOW.internal.getSize().y;
 }
 void Camera::setFOV(float FOV, bool doUpdate)
 {

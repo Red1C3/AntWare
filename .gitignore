@@ -39,6 +39,9 @@ settings.json
 # C++ #
 #-----#
 
+#Clang cache
+./.cache
+
 # Prerequisites
 *.d
 

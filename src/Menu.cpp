@@ -40,7 +40,7 @@ int Menu::loop()
     while (isSelecting)
     {
         Event event;
-        while (WINDOW.internal.pollEvent(event))
+        /* while (WINDOW.internal.pollEvent(event))
         {
             switch (event.type)
             {
@@ -77,7 +77,7 @@ int Menu::loop()
             default:
                 break;
             }
-        }
+        }*/ //FIXME
         vec2 labelPos = firstLevelPos;
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         HUD.drawQuad(backgroundTex, {0, 0}, backgroundSize);
@@ -95,7 +95,7 @@ int Menu::loop()
             }
             labelPos.y += yMargain;
         }
-        WINDOW.internal.display();
+//FIXME        WINDOW.internal.display();
     }
     glUseProgram(0);
     glBindTexture(GL_TEXTURE_2D, 0);
