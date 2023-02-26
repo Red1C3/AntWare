@@ -1,4 +1,7 @@
-#version 330 core
+#version 300 es
+
+precision lowp float;
+
 layout(location = 0) out vec4 outColor0;
 in vec2 uv;
 uniform vec3 color;

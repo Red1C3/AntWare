@@ -12,14 +12,19 @@ Renderer &Renderer::instance()
 void Renderer::init()
 {
     glewExperimental = true;
-    glewInit();
+    if (glewInit()!=GLEW_OK){
+        printf("Failed to init GLEW");
+        assert(0);
+    }
 
+    assert(glGetError()==0);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClearDepth(1.0f);
+    glClearDepthf(1.0f);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glEnable(GL_CULL_FACE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    assert(glGetError()==0);
 
     mainShader = loadShaderProgram("Shaders/main.vert", "Shaders/main.frag");
     glUseProgram(mainShader);
@@ -96,13 +101,13 @@ GLuint Renderer::loadShaderProgram(const char *vertexShaderPath, const char *fra
     vector<char> infoLog(infoLogLen);
     glGetShaderInfoLog(vertexShader, infoLog.size(), nullptr, infoLog.data());
     infoLog.push_back('\0');
-    printf(infoLog.data());
+    printf("%s", infoLog.data());
     infoLog.resize(0);
     glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &infoLogLen);
     infoLog.resize(infoLogLen);
     glGetShaderInfoLog(fragmentShader, infoLog.size(), nullptr, infoLog.data());
     infoLog.push_back('\0');
-    printf(infoLog.data());
+    printf("%s", infoLog.data());
     infoLog.resize(0);
 #endif
     program = glCreateProgram();
@@ -114,7 +119,7 @@ GLuint Renderer::loadShaderProgram(const char *vertexShaderPath, const char *fra
     infoLog.resize(infoLogLen);
     glGetProgramInfoLog(program, infoLogLen, nullptr, infoLog.data());
     infoLog.push_back('\0');
-    printf(infoLog.data());
+    printf("%s", infoLog.data());
 #endif
     glDetachShader(program, vertexShader);
     glDetachShader(program, fragmentShader);

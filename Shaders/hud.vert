@@ -1,4 +1,4 @@
-#version 330 core
+#version 300 es
 layout(location = 0) in vec4 positionModel;
 out vec2 uv;
 const mat4 ortho = mat4(vec4(0.125, 0, 0, 0), vec4(0, 0.222222224, 0, 0),

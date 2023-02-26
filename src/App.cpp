@@ -13,9 +13,8 @@ bool App::init(int argc, char **argv)
     srand(time(nullptr));
     readSettingsFile();
     WINDOW.init(settings.resHeight, settings.resWidth);
-    return true;
     RENDERER.init();
-
+return true;
     MENU.init(settings.levels, settings.levelsLabels);
     int i = MENU.loop();
     if (i == -1)

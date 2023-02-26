@@ -1,4 +1,8 @@
-#version 330
+#version 300 es
+
+precision highp int;
+precision highp float;
+
 const int MAX_LIGHTS = 20;
 const float ambientFactor = 0.1;
 const float QUADRATIC_ATTEN = 0.05;
@@ -28,7 +32,7 @@ struct Material {
 uniform sampler2D albedo;
 uniform Material material;
 uniform vec3 observerPos;
-uniform bool shadeless = false;
+uniform bool shadeless; //FIXME set to false from code on start
 
 layout(std140) uniform Lights { LightStruct lights[MAX_LIGHTS]; };
 
@@ -44,11 +48,11 @@ void main() {
     if (lights[i].enabled) {
       if (lights[i].type == 0) { // Directional
         vec3 fragToLight = -lights[i].direction;
-        float diffuseFactor = max(dot(fragToLight, nWorld), 0);
+        float diffuseFactor = max(dot(fragToLight, nWorld), 0.0);
         vec3 fragToObserver = normalize(-fragWorld + observerPos);
         vec3 halfWay = normalize(fragToLight + fragToObserver);
         float specFactor =
-            max(pow(dot(halfWay, nWorld), material.shininess), 0) /
+            max(pow(dot(halfWay, nWorld), material.shininess), 0.0) /
             (distance(fragWorld, observerPos) * LINEAR_ATTEN);
         color +=
             diffuseFactor * lights[i].diffuse * material.diffuse * texColor +
@@ -57,13 +61,13 @@ void main() {
       } else if (lights[i].type == 1) { // Point
         vec3 fragToLight = normalize(-fragWorld + lights[i].position);
         float quadraticAtten =
-            ((pow(distance(fragWorld, lights[i].position), 2)) *
+            ((pow(distance(fragWorld, lights[i].position), 2.0)) *
              QUADRATIC_ATTEN);
-        float diffuseFactor = max(dot(fragToLight, nWorld), 0) / quadraticAtten;
+        float diffuseFactor = max(dot(fragToLight, nWorld), 0.0) / quadraticAtten;
         vec3 fragToObserver = normalize(-fragWorld + observerPos);
         vec3 halfWay = normalize(fragToLight + fragToObserver);
         float specFactor =
-            max(pow(dot(halfWay, nWorld), material.shininess), 0) /
+            max(pow(dot(halfWay, nWorld), material.shininess), 0.0) /
             (quadraticAtten + distance(fragWorld, observerPos) * LINEAR_ATTEN);
         color +=
             diffuseFactor * lights[i].diffuse * material.diffuse * texColor +
@@ -75,13 +79,13 @@ void main() {
         if (dirToLight < cos(radians(lights[i].angle)))
           continue;
         float quadraticAtten =
-            ((pow(distance(fragWorld, lights[i].position), 2)) *
+            ((pow(distance(fragWorld, lights[i].position), 2.0)) *
              QUADRATIC_ATTEN);
-        float diffuseFactor = max(dot(fragToLight, nWorld), 0) / quadraticAtten;
+        float diffuseFactor = max(dot(fragToLight, nWorld), 0.0) / quadraticAtten;
         vec3 fragToObserver = normalize(-fragWorld + observerPos);
         vec3 halfWay = normalize(fragToLight + fragToObserver);
         float specFactor =
-            max(pow(dot(halfWay, nWorld), material.shininess), 0) /
+            max(pow(dot(halfWay, nWorld), material.shininess), 0.0) /
             (quadraticAtten + distance(fragWorld, observerPos) * LINEAR_ATTEN);
         color +=
             diffuseFactor * lights[i].diffuse * material.diffuse * texColor +
