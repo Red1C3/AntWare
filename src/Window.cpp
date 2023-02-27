@@ -1,5 +1,6 @@
 #include "SDL_events.h"
 #include "SDL_mixer.h"
+#include "SDL_mouse.h"
 #include <SDL2/SDL_video.h>
 #include<SDL2/SDL_image.h>
 #include<assert.h>
@@ -28,6 +29,7 @@ void Window::init(int height, int width)
         printf("Failed to create SDL window, err: %s",SDL_GetError());
         assert(0);
     }
+    SDL_ShowCursor(SDL_DISABLE);
     internal.ctx=SDL_GL_CreateContext(internal.window);
     if (internal.ctx==nullptr){
         printf("Failed to create OpenGL context, err: %s",SDL_GetError());
