@@ -1,3 +1,7 @@
+#include "ClockAdapter.h"
+#include "SDL_events.h"
+#include "SDL_scancode.h"
+#include "SDL_video.h"
 #include <App.h>
 using namespace aw;
 using namespace rapidjson;
@@ -59,24 +63,24 @@ void App::terminate()
 void App::loop()
 {
     auto player = ((Player *)(currentScene->gameObjects[0]));
-    sf::Clock clock, shootTimer, reloadTimer;
+    ClockAdapter clock, shootTimer, reloadTimer;
     while (true)
     {
-        //sf::Event event;
-       /* while (WINDOW.internal.pollEvent(event))
+       SDL_Event event;
+       while (WINDOW.internal.pollEvent(event))
         {
             switch (event.type)
             {
-            case sf::Event::Closed:
+            case SDL_QUIT:
                 terminate();
                 return;
-            case sf::Event::Resized:
-                glViewport(0, 0, event.size.width, event.size.height);
-                currentScene->camera.setAspectRatio((float)WINDOW.internal.getSize().x / (float)WINDOW.internal.getSize().y);
+            case SDL_WINDOWEVENT_RESIZED:
+                glViewport(0, 0, event.window.data1, event.window.data2);
+                currentScene->camera.setAspectRatio((float)event.window.data1 / (float)event.window.data2);
                 break;
-            case sf::Event::MouseButtonReleased:
+            case SDL_MOUSEBUTTONUP:
                 if (
-                    event.mouseButton.button == sf::Mouse::Left &&
+                    event.button.button == SDL_BUTTON_LEFT &&
                     reloadTimer.getElapsedTime().asSeconds() > 1.5f &&
                     shootTimer.getElapsedTime().asSeconds() > 0.2f &&
                     gameStatus == ONGOING)
@@ -99,12 +103,12 @@ void App::loop()
                     }
                 }
                 break;
-            case sf::Event::KeyReleased:
-                if (event.key.code == sf::Keyboard::F && gameStatus == ONGOING)
+            case SDL_KEYUP:
+                if (event.key.keysym.scancode == SDL_SCANCODE_F && gameStatus == ONGOING)
                 {
                     currentScene->lights[0].toggle();
                 }
-                if (event.key.code == sf::Keyboard::R && reloadTimer.getElapsedTime().asSeconds() > 1.5f && gameStatus == ONGOING)
+                if (event.key.keysym.scancode == SDL_SCANCODE_R && reloadTimer.getElapsedTime().asSeconds() > 1.5f && gameStatus == ONGOING)
                 {
                     if (player->totalAmmo > 0 && player->inHandAmmo < player->maxAmmo)
                     {
@@ -112,13 +116,13 @@ void App::loop()
                         player->reload();
                     }
                 }
-                if (event.key.code == sf::Keyboard::M && gameStatus == ONGOING)
+                if (event.key.keysym.scancode == SDL_SCANCODE_M && gameStatus == ONGOING)
                 {
                     easterEggSound.play();
                 }
                 break;
-            case sf::Event::KeyPressed:
-                if (event.key.code == sf::Keyboard::Escape)
+            case SDL_KEYDOWN:
+                if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
                 {
                     terminate();
                     return;
@@ -126,7 +130,7 @@ void App::loop()
             default:
                 break;
             }
-        }*/ //FIXME
+        }
         if (gameStatus == ONGOING)
         {
             PHYSICS.apply(currentScene, deltaTime);
