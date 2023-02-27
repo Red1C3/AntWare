@@ -1,3 +1,4 @@
+#include "SDL_events.h"
 #include "SDL_mixer.h"
 #include <SDL2/SDL_video.h>
 #include<SDL2/SDL_image.h>
@@ -57,4 +58,10 @@ void Window::terminate()
 }
 SDL_Window* Window::WindowAdapter::getHandle(){
     return window;
+}
+int Window::WindowAdapter::pollEvent(SDL_Event& event){
+    return SDL_PollEvent(&event);
+}
+void Window::WindowAdapter::display(){
+    SDL_GL_SwapWindow(window);
 }

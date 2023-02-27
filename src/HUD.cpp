@@ -66,13 +66,13 @@ void Hud::loadTexture(const char *path, GLuint &tex)
         printf("Failed to load image %s, err:%s",path,IMG_GetError());
         assert(0);
     }
-    SDL_Surface* surfacePixels=SDL_ConvertSurfaceFormat(surface,SDL_GetWindowPixelFormat(WINDOW.internal.getHandle()),0);
+    SDL_Surface* surfacePixels=SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA32,0);
     if(surfacePixels==nullptr){
         printf("Failed to convert surface pixels for %s, err:%s",path,IMG_GetError());
         assert(0);
     }
     
-    
+//FIXME Flip image vertically (lock surface before copying data from it)    
     int imgHeight = surfacePixels->h;
     int imgWidth = surfacePixels->w;
     const Uint8 *imgData = static_cast<Uint8*>(surfacePixels->pixels);

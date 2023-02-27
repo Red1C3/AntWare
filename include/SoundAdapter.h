@@ -8,6 +8,6 @@ namespace aw{
         public:
         ~SoundAdapter();
         void setBuffer(SoundBufferAdapter soundBuffer);
-        
+        void play();
     };
 }

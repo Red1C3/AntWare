@@ -1,3 +1,4 @@
+#include "SDL_mixer.h"
 #include<assert.h>
 #include<SoundAdapter.h>
 using namespace aw;
@@ -12,4 +13,7 @@ void SoundAdapter::setBuffer(SoundBufferAdapter soundBuffer){
         printf("Failed to load file %s , err: %s",soundBuffer.getPath(),Mix_GetError());
         assert(0);
     }
+}
+void SoundAdapter::play(){
+  Mix_PlayChannel(-1,chunk,0);
 }

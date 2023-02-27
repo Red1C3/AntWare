@@ -16,6 +16,8 @@ private:
     SDL_Window *window = nullptr;
     public:
     SDL_Window* getHandle();
+    int pollEvent(SDL_Event& event);
+    void display();
   };
 
   Window();

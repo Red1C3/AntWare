@@ -15,13 +15,13 @@ bool App::init(int argc, char **argv)
     WINDOW.init(settings.resHeight, settings.resWidth);
     RENDERER.init();
     MENU.init(settings.levels, settings.levelsLabels);
-    return true;
     int i = MENU.loop();
     if (i == -1)
     {
         terminate();
         return false;
     }
+    return true;
     HUD.setStatus(LOADING);
     HUD.draw();
 //FIXME    WINDOW.internal.display();

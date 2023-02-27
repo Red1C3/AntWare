@@ -1,4 +1,7 @@
+#include "SDL_events.h"
+#include "SDL_keycode.h"
 #include "SDL_mixer.h"
+#include "SDL_scancode.h"
 #include <Menu.h>
 using namespace aw;
 using namespace std;
@@ -39,30 +42,30 @@ int Menu::loop()
     bool isSelecting = true;
     while (isSelecting)
     {
-        Event event;
-        /* while (WINDOW.internal.pollEvent(event))
+        SDL_Event event;
+         while (WINDOW.internal.pollEvent(event))
         {
             switch (event.type)
             {
-            case sf::Event::Closed:
+            case SDL_QUIT:
                 return -1;
-            case Event::KeyReleased:
-                if (event.key.code == Keyboard::Escape)
+            case SDL_KEYUP:
+                if (event.key.keysym.scancode == SDL_SCANCODE_ESCAPE)
                 {
                     return -1;
                 }
-                if (event.key.code == Keyboard::Enter)
+                if (event.key.keysym.scancode == SDL_SCANCODE_KP_ENTER)
                 {
                     menuPickSound.play();
                     isSelecting = false;
                 }
-                else if (event.key.code == Keyboard::Down)
+                else if (event.key.keysym.scancode == SDL_SCANCODE_DOWN)
                 {
                     menuNavigateSound.play();
                     selectedLvl++;
                     selectedLvl = selectedLvl % levels.size();
                 }
-                else if (event.key.code == Keyboard::Up)
+                else if (event.key.keysym.scancode == SDL_SCANCODE_UP)
                 {
                     menuNavigateSound.play();
                     if (selectedLvl == 0)
@@ -77,7 +80,7 @@ int Menu::loop()
             default:
                 break;
             }
-        }*/ //FIXME
+        }
         vec2 labelPos = firstLevelPos;
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         HUD.drawQuad(backgroundTex, {0, 0}, backgroundSize);
@@ -95,7 +98,7 @@ int Menu::loop()
             }
             labelPos.y += yMargain;
         }
-//FIXME        WINDOW.internal.display();
+        WINDOW.internal.display();
     }
     glUseProgram(0);
     glBindTexture(GL_TEXTURE_2D, 0);
