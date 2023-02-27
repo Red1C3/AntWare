@@ -1,3 +1,4 @@
+#include "SDL_mixer.h"
 #include <SDL2/SDL_video.h>
 #include<assert.h>
 #include <Window.h>
@@ -10,7 +11,7 @@ Window &Window::instance()
 }
 void Window::init(int height, int width)
 {
-    if(SDL_Init(SDL_INIT_VIDEO)<0){
+    if(SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO)<0){
         printf("Failed to init SDL_Video, err: %s",SDL_GetError());
         assert(0);   
     }
@@ -30,10 +31,19 @@ void Window::init(int height, int width)
         printf("Failed to create OpenGL context, err: %s",SDL_GetError());
         assert(0);
     }
+    initAudio();
+}
+void Window::initAudio(){
+    if(Mix_OpenAudio(44100,MIX_DEFAULT_FORMAT,2,2048)<0){
+        printf("Failed to open MIX, err:%s",Mix_GetError());
+        assert(0);
+    }
 }
 void Window::terminate()
 {
     SDL_DestroyWindow(internal.window);
     internal.window=nullptr;
+    Mix_CloseAudio();
+    Mix_Quit();
     SDL_Quit();
 }

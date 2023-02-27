@@ -1,3 +1,4 @@
+#include "SDL_mixer.h"
 #include <Menu.h>
 using namespace aw;
 using namespace std;
@@ -19,7 +20,6 @@ void Menu::init(vector<string> levels, vector<string> labels)
     menuPickSoundBuffer.loadFromFile("Assets/Audio/menuPick.wav");
     menuNavigateSound.setBuffer(menuNavigateSoundBuffer);
     menuPickSound.setBuffer(menuPickSoundBuffer);
-
     this->levels = levels;
     for (unsigned i = 0; i < labels.size(); ++i)
     {
@@ -102,6 +102,6 @@ int Menu::loop()
     glEnable(GL_DEPTH_TEST);
     glClearColor(0, 0, 0, 1.0f);
 
-    music.stop();
+    //FIXME music.stop();
     return selectedLvl;
 }

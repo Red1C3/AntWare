@@ -3,6 +3,7 @@
 #include<SDL2/SDL.h>
 #include<SDL2/SDL_opengl.h>
 #include <SDL2/SDL_video.h>
+#include<SDL2/SDL_mixer.h>
 #define WINDOW aw::Window::instance()
 namespace aw
 {
@@ -17,7 +18,7 @@ private:
     };
         
         Window();
-
+        void initAudio();
     public:
         WindowAdapter internal;
         static Window &instance();

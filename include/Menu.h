@@ -1,8 +1,11 @@
 #pragma once
+#include "SDL_mixer.h"
 #include <vector>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Event.hpp>
-#include <SFML/Audio.hpp>
+#include<MusicAdapter.h>
+#include<SoundAdapter.h>
+#include<SoundBufferAdapter.h>
 #include <Window.h>
 #include <HUD.h>
 #include<glm/gtc/matrix_transform.hpp>
@@ -13,9 +16,9 @@ namespace aw
     {
     private:
         Menu();
-        sf::Music music;
-        sf::SoundBuffer menuPickSoundBuffer, menuNavigateSoundBuffer;
-        sf::Sound menuPickSound, menuNavigateSound;
+        MusicAdapter music;
+        SoundBufferAdapter menuPickSoundBuffer, menuNavigateSoundBuffer;
+        SoundAdapter menuPickSound, menuNavigateSound;
         std::vector<std::string> levels;
         std::vector<GLuint> labels;
         GLuint backgroundTex, gameLabelTex, creditsTex;

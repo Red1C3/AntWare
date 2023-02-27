@@ -6,6 +6,7 @@ project('antware', 'cpp',
 glm_dep = dependency('glm')
 glew_dep = dependency('glew')
 sdl2_dep=dependency('sdl2')
+sdl2_mixer_dep=dependency('sdl2_mixer')
 if host_machine.system() == 'linux'
     sfml_dep = dependency('sfml-all')
     assimp_dep = dependency('assimp')
@@ -47,11 +48,11 @@ executable('antware', sources,
     win_subsystem: 'windows',
     override_options: ['cpp_std=c++17'],
     include_directories: ['include'],
-    dependencies: [sfml_dep, glew_dep, glm_dep, rapidjson_dep, assimp_dep,sdl2_dep])
+    dependencies: [sfml_dep, glew_dep, glm_dep, rapidjson_dep, assimp_dep,sdl2_dep,sdl2_mixer_dep])
 elif host_machine.system() == 'linux'
 executable('antware', sources,
     override_options: ['cpp_std=c++17'],
     include_directories: ['include'],
-    dependencies: [sfml_dep, glew_dep, glm_dep, assimp_dep,sdl2_dep],
+    dependencies: [sfml_dep, glew_dep, glm_dep, assimp_dep,sdl2_dep,sdl2_mixer_dep],
     cpp_args:['-DDEBUG'])
 endif
