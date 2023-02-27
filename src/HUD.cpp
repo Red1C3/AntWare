@@ -1,4 +1,9 @@
+#include "SDL_image.h"
+#include "SDL_stdinc.h"
+#include "SDL_surface.h"
+#include "SDL_video.h"
 #include <HUD.h>
+#include<Window.h>
 using namespace aw;
 using namespace sf;
 using namespace glm;
@@ -56,15 +61,21 @@ void Hud::draw()
 }
 void Hud::loadTexture(const char *path, GLuint &tex)
 {
-    Image image;
-    if (!image.loadFromFile(path))
-    {
-        throw "Couldn't load HUD texture file";
+    SDL_Surface* surface=IMG_Load(path);
+    if(surface==nullptr){
+        printf("Failed to load image %s, err:%s",path,IMG_GetError());
+        assert(0);
     }
-    image.flipVertically();
-    int imgHeight = image.getSize().y;
-    int imgWidth = image.getSize().x;
-    const Uint8 *imgData = image.getPixelsPtr();
+    SDL_Surface* surfacePixels=SDL_ConvertSurfaceFormat(surface,SDL_GetWindowPixelFormat(WINDOW.internal.getHandle()),0);
+    if(surfacePixels==nullptr){
+        printf("Failed to convert surface pixels for %s, err:%s",path,IMG_GetError());
+        assert(0);
+    }
+    
+    
+    int imgHeight = surfacePixels->h;
+    int imgWidth = surfacePixels->w;
+    const Uint8 *imgData = static_cast<Uint8*>(surfacePixels->pixels);
 
     glGenTextures(1, &tex);
     glBindTexture(GL_TEXTURE_2D, tex);
@@ -78,6 +89,9 @@ void Hud::loadTexture(const char *path, GLuint &tex)
     glGenerateMipmap(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, 0);
     assert(glGetError() == 0);
+
+    SDL_FreeSurface(surfacePixels);
+    SDL_FreeSurface(surface);
 }
 void Hud::drawQuad(GLuint texture, glm::vec2 pos, glm::vec2 size, glm::vec3 color)
 {

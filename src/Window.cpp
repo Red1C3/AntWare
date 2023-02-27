@@ -1,5 +1,6 @@
 #include "SDL_mixer.h"
 #include <SDL2/SDL_video.h>
+#include<SDL2/SDL_image.h>
 #include<assert.h>
 #include <Window.h>
 using namespace aw;
@@ -39,6 +40,13 @@ void Window::initAudio(){
         assert(0);
     }
 }
+void Window::initImageLoading(){
+    int imgFlags=IMG_INIT_PNG;
+    if(!(IMG_Init(imgFlags)&imgFlags)){
+        printf("Failed to init images loading, err:%s",IMG_GetError());
+        assert(0);
+    }
+}
 void Window::terminate()
 {
     SDL_DestroyWindow(internal.window);
@@ -46,4 +54,7 @@ void Window::terminate()
     Mix_CloseAudio();
     Mix_Quit();
     SDL_Quit();
+}
+SDL_Window* Window::WindowAdapter::getHandle(){
+    return window;
 }
