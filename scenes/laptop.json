@@ -124,7 +124,7 @@
         },
         {
             "path": "Assets/Models/laptop - 1.glb",
-            "texture": "Assets/Textures/LaptopKeys_albedo.jpg",
+            "texture": "Assets/Textures/LaptopKeys_albedo.png",
             "color": [
                 1,
                 1,
@@ -134,7 +134,7 @@
         },
         {
             "path": "Assets/Models/laptop - 2.glb",
-            "texture": "Assets/Textures/LaptopFront_albedo.jpg",
+            "texture": "Assets/Textures/LaptopFront_albedo.png",
             "color": [
                 1,
                 1,
@@ -144,7 +144,7 @@
         },
         {
             "path": "Assets/Models/laptop - 3.glb",
-            "texture": "Assets/Textures/LaptopScreen_albedo.jpg",
+            "texture": "Assets/Textures/LaptopScreen_albedo.png",
             "color": [
                 1,
                 1,
@@ -154,7 +154,7 @@
         },
         {
             "path": "Assets/Models/laptop - 4.glb",
-            "texture": "Assets/Textures/LapTopMisc_albedo.jpg",
+            "texture": "Assets/Textures/LapTopMisc_albedo.png",
             "color": [
                 1,
                 1,
@@ -164,7 +164,7 @@
         },
         {
             "path": "Assets/Models/laptop - 5.glb",
-            "texture": "Assets/Textures/LaptopFront_albedo.jpg",
+            "texture": "Assets/Textures/LaptopFront_albedo.png",
             "color": [
                 1,
                 1,
@@ -174,7 +174,7 @@
         },
         {
             "path": "Assets/Models/laptop - 6.glb",
-            "texture": "Assets/Textures/LaptopKeys_albedo.jpg",
+            "texture": "Assets/Textures/LaptopKeys_albedo.png",
             "color": [
                 1,
                 1,
@@ -184,7 +184,7 @@
         },
         {
             "path": "Assets/Models/laptop - 7.glb",
-            "texture": "Assets/Textures/LapTopMisc_albedo.jpg",
+            "texture": "Assets/Textures/LapTopMisc_albedo.png",
             "color": [
                 1,
                 1,
@@ -194,7 +194,7 @@
         },
         {
             "path": "Assets/Models/laptop - 8.glb",
-            "texture": "Assets/Textures/LaptopFront_albedo.jpg",
+            "texture": "Assets/Textures/LaptopFront_albedo.png",
             "color": [
                 1,
                 1,

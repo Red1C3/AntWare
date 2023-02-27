@@ -65,7 +65,7 @@
         },
         {
             "path": "./Assets/Models/CPU.glb",
-            "texture": "Assets/Textures/CPU.jpg",
+            "texture": "Assets/Textures/CPU.png",
             "color": [
                 1,
                 1,
