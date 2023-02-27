@@ -13,5 +13,6 @@ public:
   void setVolume(int volume);
   void setLoop(bool loop);
   void play();
+  void stop();
 };
 } // namespace aw

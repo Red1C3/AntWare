@@ -102,6 +102,6 @@ int Menu::loop()
     glEnable(GL_DEPTH_TEST);
     glClearColor(0, 0, 0, 1.0f);
 
-    //FIXME music.stop();
+    music.stop();
     return selectedLvl;
 }

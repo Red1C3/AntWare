@@ -1,3 +1,4 @@
+#include "SDL_mixer.h"
 #include<assert.h>
 #include<MusicAdapter.h>
 
@@ -25,4 +26,7 @@ void MusicAdapter::play(){
 }
 MusicAdapter::~MusicAdapter(){
     Mix_FreeMusic(music);
+}
+void MusicAdapter::stop(){
+  Mix_HaltMusic();
 }
