@@ -65,3 +65,12 @@ int Window::WindowAdapter::pollEvent(SDL_Event& event){
 void Window::WindowAdapter::display(){
     SDL_GL_SwapWindow(window);
 }
+Window::WindowAdapter::SizeAdapter Window::WindowAdapter::getSize(){
+    int width,height;
+    SDL_GetWindowSize(window,&width,&height);
+    return Window::WindowAdapter::SizeAdapter(width,height);
+}
+Window::WindowAdapter::SizeAdapter::SizeAdapter(int x,int y){
+    this->x=x;
+    this->y=y;
+}

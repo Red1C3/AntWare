@@ -10,7 +10,11 @@ class Window {
 private:
   class WindowAdapter {
     friend Window;
-
+    class SizeAdapter{
+      public:
+      SizeAdapter(int x,int y);
+      int x,y;
+    };
   private:
     SDL_GLContext ctx = nullptr;
     SDL_Window *window = nullptr;
@@ -18,6 +22,7 @@ private:
     SDL_Window* getHandle();
     int pollEvent(SDL_Event& event);
     void display();
+    SizeAdapter getSize();
   };
 
   Window();

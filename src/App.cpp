@@ -76,7 +76,7 @@ void App::loop()
                 return;
             case SDL_WINDOWEVENT_RESIZED:
                 glViewport(0, 0, event.window.data1, event.window.data2);
-                currentScene->camera.setAspectRatio((float)event.window.data1 / (float)event.window.data2);
+                currentScene->camera.setAspectRatio((float)WINDOW.internal.getSize().x / (float)WINDOW.internal.getSize().y);
                 break;
             case SDL_MOUSEBUTTONUP:
                 if (
