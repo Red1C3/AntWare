@@ -54,7 +54,7 @@ int Menu::loop()
                 {
                     return -1;
                 }
-                if (event.key.keysym.scancode == SDL_SCANCODE_KP_ENTER)
+                if (event.key.keysym.scancode == SDL_SCANCODE_RETURN)
                 {
                     menuPickSound.play();
                     isSelecting = false;

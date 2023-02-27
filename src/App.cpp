@@ -21,10 +21,9 @@ bool App::init(int argc, char **argv)
         terminate();
         return false;
     }
-    return true;
     HUD.setStatus(LOADING);
     HUD.draw();
-//FIXME    WINDOW.internal.display();
+    WINDOW.internal.display();
 
     music.openFromFile(settings.levelsMusic[i]);
     music.setVolume(60);
