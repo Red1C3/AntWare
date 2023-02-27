@@ -7,6 +7,7 @@
 using namespace aw;
 using namespace sf;
 using namespace glm;
+static inline const Uint8* flipSurface(SDL_Surface*);
 Hud::Hud()
 {
     char buffer[128];
@@ -72,10 +73,9 @@ void Hud::loadTexture(const char *path, GLuint &tex)
         assert(0);
     }
     
-//FIXME Flip image vertically (lock surface before copying data from it)    
     int imgHeight = surfacePixels->h;
     int imgWidth = surfacePixels->w;
-    const Uint8 *imgData = static_cast<Uint8*>(surfacePixels->pixels);
+    const Uint8 *imgData = flipSurface(surfacePixels);
 
     glGenTextures(1, &tex);
     glBindTexture(GL_TEXTURE_2D, tex);
@@ -92,6 +92,7 @@ void Hud::loadTexture(const char *path, GLuint &tex)
 
     SDL_FreeSurface(surfacePixels);
     SDL_FreeSurface(surface);
+    delete[] imgData;
 }
 void Hud::drawQuad(GLuint texture, glm::vec2 pos, glm::vec2 size, glm::vec3 color)
 {
@@ -276,4 +277,14 @@ void Hud::createQuadVAO()
     glEnableVertexAttribArray(0);
     glBindVertexArray(0);
     assert(glGetError() == 0);
+}
+static inline const Uint8* flipSurface(SDL_Surface* surface){
+    SDL_LockSurface(surface);
+    const Uint8* pixels=static_cast<Uint8*>(surface->pixels);
+    Uint8* flippedPixels=new Uint8[surface->w*surface->h*4];
+    for(int i=0;i<surface->h;++i){
+        memcpy(&flippedPixels[(surface->h-1-i)*surface->w*4],&pixels[i*surface->w*4],surface->w*4);
+    }
+    SDL_UnlockSurface(surface);
+    return flippedPixels;
 }

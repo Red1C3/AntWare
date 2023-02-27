@@ -16,7 +16,6 @@ void Renderer::init()
         printf("Failed to init GLEW");
         assert(0);
     }
-
     assert(glGetError()==0);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     glClearDepthf(1.0f);
