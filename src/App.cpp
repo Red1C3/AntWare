@@ -62,7 +62,7 @@ void App::loop()
     sf::Clock clock, shootTimer, reloadTimer;
     while (true)
     {
-        sf::Event event;
+        //sf::Event event;
        /* while (WINDOW.internal.pollEvent(event))
         {
             switch (event.type)

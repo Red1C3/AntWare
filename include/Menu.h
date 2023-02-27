@@ -1,8 +1,6 @@
 #pragma once
 #include "SDL_mixer.h"
 #include <vector>
-#include <SFML/Window/Keyboard.hpp>
-#include <SFML/Window/Event.hpp>
 #include<MusicAdapter.h>
 #include<SoundAdapter.h>
 #include<SoundBufferAdapter.h>

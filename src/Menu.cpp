@@ -5,7 +5,6 @@
 #include <Menu.h>
 using namespace aw;
 using namespace std;
-using namespace sf;
 using namespace glm;
 Menu::Menu() {}
 Menu &Menu::instance()
