@@ -40,7 +40,7 @@ settings.json
 #-----#
 
 #Clang cache
-./.cache
+.cache
 
 # Prerequisites
 *.d
@@ -79,3 +79,7 @@ settings.json
 # Python WIP
 scripts
 .venv
+
+
+# Renderdoc Captures
+*.cap
