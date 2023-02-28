@@ -32,7 +32,7 @@ struct Material {
 uniform sampler2D albedo;
 uniform Material material;
 uniform vec3 observerPos;
-uniform bool shadeless; //FIXME set to false from code on start
+uniform bool shadeless; 
 
 layout(std140) uniform Lights { LightStruct lights[MAX_LIGHTS]; };
 

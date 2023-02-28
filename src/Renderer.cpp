@@ -28,6 +28,7 @@ void Renderer::init()
     mainShader = loadShaderProgram("Shaders/main.vert", "Shaders/main.frag");
     glUseProgram(mainShader);
     shadelessLocation = getUniformLocation("shadeless");
+    glUniform1i(shadelessLocation,0);
     glUseProgram(0);
     HUD.setShaderProgram(loadShaderProgram("Shaders/hud.vert", "Shaders/hud.frag"));
     assert(glGetError() == 0);
