@@ -29,7 +29,7 @@ bool App::init(int argc, char **argv)
     HUD.draw();
     WINDOW.internal.display();
 
-    music.openFromFile(settings.levelsMusic[i]);
+    music.openFromFile(settings.levelsMusic[i].c_str());
     music.setVolume(60);
     music.setLoop(true);
     music.play();

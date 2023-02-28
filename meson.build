@@ -9,18 +9,12 @@ sdl2_dep=dependency('sdl2')
 sdl2_mixer_dep=dependency('sdl2_mixer')
 sdl2_image_dep=dependency('sdl2_image')
 if host_machine.system() == 'linux'
-    sfml_dep = dependency('sfml-all')
     assimp_dep = dependency('assimp')
 elif host_machine.system() == 'windows'
     rapidjson_dep = dependency('rapidjson')
     cmake = import('cmake')
     compiler = meson.get_compiler('cpp')
     
-    if target_machine.cpu_family() == 'x86'
-        sfml_dep = dependency('sfml_win32')
-    elif target_machine.cpu_family() == 'x86_64'
-        sfml_dep = dependency('sfml_win64')
-    endif
 
     assimp_opt = cmake.subproject_options()
     assimp_opt.add_cmake_defines({
@@ -49,11 +43,11 @@ executable('antware', sources,
     win_subsystem: 'windows',
     override_options: ['cpp_std=c++17'],
     include_directories: ['include'],
-    dependencies: [sfml_dep, glew_dep, glm_dep, rapidjson_dep, assimp_dep,sdl2_dep,sdl2_mixer_dep,sdl2_image_dep])
+    dependencies: [ glew_dep, glm_dep, rapidjson_dep, assimp_dep,sdl2_dep,sdl2_mixer_dep,sdl2_image_dep])
 elif host_machine.system() == 'linux'
 executable('antware', sources,
     override_options: ['cpp_std=c++17'],
     include_directories: ['include'],
-    dependencies: [sfml_dep, glew_dep, glm_dep, assimp_dep,sdl2_dep,sdl2_mixer_dep,sdl2_image_dep],
+    dependencies: [glew_dep, glm_dep, assimp_dep,sdl2_dep,sdl2_mixer_dep,sdl2_image_dep],
     cpp_args:['-DDEBUG'])
 endif

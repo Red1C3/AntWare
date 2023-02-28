@@ -1,9 +1,14 @@
+#include "SDL_image.h"
+#include "SDL_surface.h"
 #include <Mesh.h>
 using namespace aw;
 using namespace glm;
 using namespace std;
 using namespace Assimp;
 using namespace sf;
+
+
+static inline const Uint8* flipSurface(SDL_Surface*);
 
 Importer Mesh::importer;
 GLuint Mesh::VAO;
@@ -68,16 +73,20 @@ Mesh::Mesh(const char *path, glm::vec3 color, const char *texPath) : Mesh(path,
                                                                           texPath) {}
 void Mesh::loadTexture(const char *path)
 {
-    Image image;
-    if (!image.loadFromFile(path))
-    {
-        throw runtime_error(path); // TODO prettier formatting
+    SDL_Surface* surface=IMG_Load(path);
+    if(surface==nullptr){
+        printf("Failed to load image %s, err:%s",path,IMG_GetError());
+        assert(0);
     }
-    image.flipVertically();
-    hasTexture = true;
-    int imgHeight = image.getSize().y;
-    int imgWidth = image.getSize().x;
-    const Uint8 *imgData = image.getPixelsPtr();
+    SDL_Surface* surfacePixels=SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA32,0);
+    if(surfacePixels==nullptr){
+        printf("Failed to convert surface pixels for %s, err:%s",path,IMG_GetError());
+        assert(0);
+    }
+    
+    int imgHeight = surfacePixels->h;
+    int imgWidth = surfacePixels->w;
+    const Uint8 *imgData = flipSurface(surfacePixels);
 
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -89,18 +98,27 @@ void Mesh::loadTexture(const char *path)
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imgData);
     glGenerateMipmap(GL_TEXTURE_2D);
+
+    SDL_FreeSurface(surfacePixels);
+    SDL_FreeSurface(surface);
+    delete[] imgData;
 }
 int Mesh::createTexture(const char *path)
 {
-    Image image;
-    if (!image.loadFromFile(path))
-    {
-        throw runtime_error(path);
+    SDL_Surface* surface=IMG_Load(path);
+    if(surface==nullptr){
+        printf("Failed to load image %s, err:%s",path,IMG_GetError());
+        assert(0);
     }
-    image.flipVertically();
-    int imgHeight = image.getSize().y;
-    int imgWidth = image.getSize().x;
-    const Uint8 *imgData = image.getPixelsPtr();
+    SDL_Surface* surfacePixels=SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA32,0);
+    if(surfacePixels==nullptr){
+        printf("Failed to convert surface pixels for %s, err:%s",path,IMG_GetError());
+        assert(0);
+    }
+    
+    int imgHeight = surfacePixels->h;
+    int imgWidth = surfacePixels->w;
+    const Uint8 *imgData = flipSurface(surfacePixels);
     GLuint texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
@@ -112,6 +130,9 @@ int Mesh::createTexture(const char *path)
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imgData);
     glGenerateMipmap(GL_TEXTURE_2D);
+    SDL_FreeSurface(surfacePixels);
+    SDL_FreeSurface(surface);
+    delete[] imgData;
     return texture;
 }
 void Mesh::draw()
@@ -226,4 +247,14 @@ void Mesh::constructVAO(vector<shared_ptr<Mesh>> meshes)
 }
 const string Mesh::getName(){
     return name;
+}
+static inline const Uint8* flipSurface(SDL_Surface* surface){
+    SDL_LockSurface(surface);
+    const Uint8* pixels=static_cast<Uint8*>(surface->pixels);
+    Uint8* flippedPixels=new Uint8[surface->w*surface->h*4];
+    for(int i=0;i<surface->h;++i){
+        memcpy(&flippedPixels[(surface->h-1-i)*surface->w*4],&pixels[i*surface->w*4],surface->w*4);
+    }
+    SDL_UnlockSurface(surface);
+    return flippedPixels;
 }

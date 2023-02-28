@@ -1,4 +1,8 @@
 #pragma once
+#include "ClockAdapter.h"
+#include "MusicAdapter.h"
+#include "SoundAdapter.h"
+#include "SoundBufferAdapter.h"
 #include <assert.h>
 #include <fstream>
 #include <vector>
@@ -6,8 +10,6 @@
 #include <random>
 #include <rapidjson/document.h>
 #include <GL/glew.h>
-#include <SFML/System/Clock.hpp>
-#include <SFML/Audio.hpp>
 #include <Window.h>
 #include <Renderer.h>
 #include <Menu.h>
@@ -36,13 +38,13 @@ namespace aw
         void update();
         void readSettingsFile();
 
-        sf::Clock timeSinceStart;
+        ClockAdapter timeSinceStart;
         Scene *currentScene;
         float deltaTime = 0.0f;
         Status gameStatus;
-        sf::Music music;
-        sf::SoundBuffer easterEggSoundBuffer;
-        sf::Sound easterEggSound;
+        MusicAdapter music;
+        SoundBufferAdapter easterEggSoundBuffer;
+        SoundAdapter easterEggSound;
 
     public:
         static App &instance();

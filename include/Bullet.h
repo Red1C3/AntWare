@@ -1,13 +1,12 @@
 #pragma once
-#include <SFML/System/Clock.hpp>
-#include <SFML/System/Time.hpp>
+#include "ClockAdapter.h"
 #include <GameObject.h>
 namespace aw
 {
     class Bullet : public GameObject
     {
     private:
-        sf::Clock timer;
+        ClockAdapter timer;
         float lifeSpan = 5.0f;
         float speed = 40.0f;
 
