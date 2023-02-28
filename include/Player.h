@@ -12,7 +12,7 @@ namespace aw
 {
     class Player : public GameObject
     {
-
+        const Uint8* keyboard;
         float speed = 10.0f, runningSpeed = 20.0f;
         float mouseSenstivity = 10.0f;
         glm::vec3 eularAngles = {0, 0, 0};
