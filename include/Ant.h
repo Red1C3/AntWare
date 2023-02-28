@@ -20,6 +20,7 @@ namespace aw
         sf::Clock timeSinceDealtDamage;
 
         Ant(std::shared_ptr<Mesh> mesh, Material material, GameObject *parent);
+        virtual ~Ant();
         void start() override;
         void update() override;
         void damage(unsigned amount);

@@ -1,6 +1,7 @@
 #include <Ant.h>
 using namespace aw;
 using namespace std;
+Ant::~Ant(){}
 Ant::Ant(shared_ptr<Mesh> mesh, Material material, GameObject *parent) : GameObject(mesh, material, parent, false, 3)
 {
     hurtSoundBuffer.loadFromFile("Assets/Audio/antHurt.ogg");

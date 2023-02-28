@@ -42,7 +42,7 @@ void Light::constructUniformBuffer(vector<Light> &lights)
 {
 	if (lights.size() > 20)
 	{
-		printf("requested more lights (%d) than the specified limit, ignoring past 20 lights",
+		printf("requested more lights (%li) than the specified limit, ignoring past 20 lights",
 			   lights.size());
 	}
 	vector<char> stagingBuffer(sizeof(LightStruct) * lights.size());

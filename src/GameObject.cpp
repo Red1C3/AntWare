@@ -4,7 +4,7 @@ using namespace glm;
 using namespace std;
 
 GLuint GameObject::modelLocation;
-
+GameObject::~GameObject (){}
 GameObject::GameObject(shared_ptr<Mesh> mesh, Material material, GameObject *parent, bool isStatic, int type) : meshPtr(mesh),
 																												isStatic(isStatic),
 																												classType(type),
@@ -151,7 +151,8 @@ std::shared_ptr<Mesh> GameObject::getMesh()
 {
 	return meshPtr;
 }
-void GameObject::setModelLocation(GLuint location){
+void GameObject::setModelLocation(GLuint location)
+{
 	modelLocation = location;
 }
 void GameObject::drawAABB(vec3 color)

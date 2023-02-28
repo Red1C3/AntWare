@@ -32,6 +32,9 @@ Player loses if his HP reaches zero, he runs out of ammo, or he falls off the ma
 ![CPU Top (V1)](Screenshots/cpu-top.png)
 ![Motherboard (V1)](Screenshots/motherboard.png)
 
+## [Lite-Dependencies](https://github.com/Red1C3/AntWare/tree/lite-dependencies)
+While SFML has proven to be remarkably convinent, we decided to port the game to SDL2 mainly for portablity, the main branch and development will remain dependant on SFML, while [lite-dependencies](https://github.com/Red1C3/AntWare/tree/lite-dependencies) (which is still WIP) will remain SDL2, we'll keep it updated though.
+
 ## Assets
 
 ### 3D Models
