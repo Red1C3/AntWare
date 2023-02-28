@@ -39,6 +39,9 @@ settings.json
 # C++ #
 #-----#
 
+# Clang cache
+.cache
+
 # Prerequisites
 *.d
 
@@ -76,3 +79,6 @@ settings.json
 # Python WIP
 scripts
 .venv
+
+# Renderdoc capture files
+*.cap
