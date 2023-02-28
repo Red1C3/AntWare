@@ -2,10 +2,13 @@
 #include "SDL_stdinc.h"
 #include "SDL_surface.h"
 #include "SDL_video.h"
+#include<SDL2/SDL_image.h>
+#include<SDL2/SDL_stdinc.h>
+#include<SDL2/SDL_surface.h>
+#include<SDL2/SDL_video.h>
 #include <HUD.h>
 #include<Window.h>
 using namespace aw;
-using namespace sf;
 using namespace glm;
 static inline const Uint8* flipSurface(SDL_Surface*);
 Hud::Hud()

@@ -1,7 +1,7 @@
-#include "SDL_events.h"
-#include "SDL_keycode.h"
-#include "SDL_mixer.h"
-#include "SDL_scancode.h"
+#include<SDL2/SDL_events.h>
+#include<SDL2/SDL_keycode.h>
+#include<SDL2/SDL_mixer.h>
+#include<SDL2/SDL_scancode.h>
 #include <Menu.h>
 using namespace aw;
 using namespace std;

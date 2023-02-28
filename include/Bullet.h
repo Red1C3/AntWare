@@ -1,5 +1,5 @@
 #pragma once
-#include "ClockAdapter.h"
+#include<ClockAdapter.h>
 #include <GameObject.h>
 namespace aw
 {

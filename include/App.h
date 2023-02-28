@@ -1,8 +1,8 @@
 #pragma once
-#include "ClockAdapter.h"
-#include "MusicAdapter.h"
-#include "SoundAdapter.h"
-#include "SoundBufferAdapter.h"
+#include<ClockAdapter.h>
+#include<MusicAdapter.h>
+#include<SoundAdapter.h>
+#include<SoundBufferAdapter.h>
 #include <assert.h>
 #include <fstream>
 #include <vector>

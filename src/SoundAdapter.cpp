@@ -1,4 +1,4 @@
-#include "SDL_mixer.h"
+#include<SDL2/SDL_mixer.h>
 #include <SoundAdapter.h>
 #include <assert.h>
 using namespace aw;

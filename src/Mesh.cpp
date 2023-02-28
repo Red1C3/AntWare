@@ -1,11 +1,10 @@
-#include "SDL_image.h"
-#include "SDL_surface.h"
+#include<SDL2/SDL_image.h>
+#include<SDL2/SDL_surface.h>
 #include <Mesh.h>
 using namespace aw;
 using namespace glm;
 using namespace std;
 using namespace Assimp;
-using namespace sf;
 
 
 static inline const Uint8* flipSurface(SDL_Surface*);

@@ -8,7 +8,6 @@
 #include <assimp/postprocess.h>
 #include <glm/glm.hpp>
 #include <GL/glew.h>
-#include <SFML/Graphics/Image.hpp>
 #include <Material.h>
 namespace aw
 {

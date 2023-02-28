@@ -1,6 +1,6 @@
-#include "SDL_events.h"
-#include "SDL_mixer.h"
-#include "SDL_mouse.h"
+#include<SDL2/SDL_events.h>
+#include<SDL2/SDL_mixer.h>
+#include<SDL2/SDL_mouse.h>
 #include <SDL2/SDL_video.h>
 #include<SDL2/SDL_image.h>
 #include<assert.h>

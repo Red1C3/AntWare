@@ -1,7 +1,7 @@
 #pragma once
-#include "ClockAdapter.h"
-#include "SoundAdapter.h"
-#include "SoundBufferAdapter.h"
+#include<ClockAdapter.h>
+#include<SoundAdapter.h>
+#include<SoundBufferAdapter.h>
 #include <GameObject.h>
 namespace aw
 {

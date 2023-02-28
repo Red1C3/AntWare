@@ -1,7 +1,5 @@
 #pragma once
 #include <random>
-#include <SFML/Window/Keyboard.hpp>
-#include <SFML/Window/Mouse.hpp>
 #include<SoundAdapter.h>
 #include<SoundBufferAdapter.h>
 #include <Window.h>

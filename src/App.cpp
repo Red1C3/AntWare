@@ -1,7 +1,7 @@
-#include "ClockAdapter.h"
-#include "SDL_events.h"
-#include "SDL_scancode.h"
-#include "SDL_video.h"
+#include<ClockAdapter.h>
+#include<SDL2/SDL_events.h>
+#include<SDL2/SDL_scancode.h>
+#include<SDL2/SDL_video.h>
 #include <App.h>
 using namespace aw;
 using namespace rapidjson;

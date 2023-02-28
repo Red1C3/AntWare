@@ -1,12 +1,11 @@
-#include "SDL_events.h"
-#include "SDL_keyboard.h"
-#include "SDL_mixer.h"
-#include "SDL_mouse.h"
-#include "SoundAdapter.h"
+#include<SDL2/SDL_events.h>
+#include<SDL2/SDL_keyboard.h>
+#include<SDL2/SDL_mixer.h>
+#include<SDL2/SDL_mouse.h>
+#include<SoundAdapter.h>
 #include <Player.h>
 using namespace aw;
 using namespace std;
-using namespace sf;
 using namespace glm;
 Player::Player(shared_ptr<Mesh> mesh, Material material,
                shared_ptr<Mesh> bulletMesh, vec2 mapMinLimit, vec2 mapMaxLimit,
