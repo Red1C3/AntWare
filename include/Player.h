@@ -2,7 +2,8 @@
 #include <random>
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/Window/Mouse.hpp>
-#include <SFML/Audio.hpp>
+#include<SoundAdapter.h>
+#include<SoundBufferAdapter.h>
 #include <Window.h>
 #include <GameObject.h>
 #include <Bullet.h>
@@ -18,8 +19,8 @@ namespace aw
         glm::vec3 childrenEular = {0, 0, 0}, childrenTranslation = {0, 0, 0};
         glm::vec2 mouseDelta;
         std::shared_ptr<Mesh> bulletMesh;
-        sf::SoundBuffer gunShotSoundBuffer, footstepsSoundBuffer, reloadSoundBuffer, hurtSoundBuffer;
-        sf::Sound gunShotSound, footstepsSound, reloadSound, hurtSound;
+        SoundBufferAdapter gunShotSoundBuffer, footstepsSoundBuffer, reloadSoundBuffer, hurtSoundBuffer;
+        SoundAdapter gunShotSound, footstepsSound, reloadSound, hurtSound;
         int transparentTexture, flashTexture;
         bool isRecoiling = false;
         float recoilImpact = 40.0f;

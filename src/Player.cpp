@@ -1,3 +1,5 @@
+#include "SDL_mixer.h"
+#include "SoundAdapter.h"
 #include <Player.h>
 using namespace aw;
 using namespace std;
@@ -12,7 +14,7 @@ Player::Player(shared_ptr<Mesh> mesh, Material material, shared_ptr<Mesh> bullet
     gunShotSoundBuffer.loadFromFile("Assets/Audio/gunshot.wav");
     reloadSoundBuffer.loadFromFile("Assets/Audio/reload.wav");
     hurtSoundBuffer.loadFromFile("Assets/Audio/playerHurt.wav");
-    footstepsSoundBuffer.loadFromFile("Assets/Audio/playerFootsteps.ogg");
+    footstepsSoundBuffer.loadFromFile("Assets/Audio/playerFootsteps.wav");
 
     gunShotSound.setBuffer(gunShotSoundBuffer);
     reloadSound.setBuffer(reloadSoundBuffer);
@@ -57,12 +59,12 @@ void Player::update()
     if (rigidbody.velocity != glm::vec3(0, 0, 0))
     {
         footstepsSound.setPitch(Keyboard::isKeyPressed(Keyboard::LShift) ? 1.5f : 1.0f);
-        if (footstepsSound.getStatus() != sf::Sound::Playing)
+        if (footstepsSound.getStatus() != SoundAdapter::PLAYING)
             footstepsSound.play();
     }
     else
     {
-        footstepsSound.pause();
+       footstepsSound.pause();
     }
 
     if (length(rigidbody.velocity) > 0)
@@ -234,9 +236,6 @@ bool Player::isDead()
 {
     return hp <= 0.0f;
 }
-void Player::killSound()
-{
-    footstepsSound.resetBuffer();
-    reloadSound.resetBuffer();
-    gunShotSound.resetBuffer();
+void Player::killSound(){
+    Mix_HaltChannel(-1);
 }
