@@ -17,6 +17,9 @@
 - Install meson using pip3 by running `pip3 install meson` under a command prompt with administrative privileges.
 - Make the `antware` repository your working directory.
 
+### Disabling Sound
+Add ```add_project_arguments('-DNOSOUND', language : 'cpp')``` to meson.build script
+
 ### Building for development (`debug`)
 
 - Run `meson setup build --buildtype=debug` to setup the build directory.
