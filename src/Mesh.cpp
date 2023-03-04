@@ -72,35 +72,8 @@ Mesh::Mesh(const char *path, glm::vec3 color, const char *texPath) : Mesh(path,
                                                                           texPath) {}
 void Mesh::loadTexture(const char *path)
 {
-    SDL_Surface* surface=IMG_Load(path);
-    if(surface==nullptr){
-        printf("Failed to load image %s, err:%s",path,IMG_GetError());
-        assert(0);
-    }
-    SDL_Surface* surfacePixels=SDL_ConvertSurfaceFormat(surface,SDL_PIXELFORMAT_RGBA32,0);
-    if(surfacePixels==nullptr){
-        printf("Failed to convert surface pixels for %s, err:%s",path,IMG_GetError());
-        assert(0);
-    }
-    
-    int imgHeight = surfacePixels->h;
-    int imgWidth = surfacePixels->w;
-    const Uint8 *imgData = flipSurface(surfacePixels);
-
-    glGenTextures(1, &texture);
-    glBindTexture(GL_TEXTURE_2D, texture);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imgWidth, imgHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, imgData);
-    glGenerateMipmap(GL_TEXTURE_2D);
-
-    SDL_FreeSurface(surfacePixels);
-    SDL_FreeSurface(surface);
-    delete[] imgData;
+    int texture=createTexture(path);
+    this->texture=texture;
 }
 int Mesh::createTexture(const char *path)
 {
