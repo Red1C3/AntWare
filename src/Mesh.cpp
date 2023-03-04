@@ -72,6 +72,7 @@ Mesh::Mesh(const char *path, glm::vec3 color, const char *texPath) : Mesh(path,
                                                                           texPath) {}
 void Mesh::loadTexture(const char *path)
 {
+    hasTexture=true;
     int texture=createTexture(path);
     this->texture=texture;
 }
@@ -87,7 +88,6 @@ int Mesh::createTexture(const char *path)
         printf("Failed to convert surface pixels for %s, err:%s",path,IMG_GetError());
         assert(0);
     }
-    
     int imgHeight = surfacePixels->h;
     int imgWidth = surfacePixels->w;
     const Uint8 *imgData = flipSurface(surfacePixels);
