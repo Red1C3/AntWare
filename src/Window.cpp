@@ -44,7 +44,7 @@ void Window::initAudio(){
     }
 }
 void Window::initImageLoading(){
-    int imgFlags=IMG_INIT_PNG;
+    int imgFlags=IMG_INIT_PNG|IMG_INIT_JPG;
     if(!(IMG_Init(imgFlags)&imgFlags)){
         printf("Failed to init images loading, err:%s",IMG_GetError());
         assert(0);
