@@ -15,7 +15,7 @@ Player::Player(shared_ptr<Mesh> mesh, Material material,
   gunShotSoundBuffer.loadFromFile("Assets/Audio/gunshot.wav");
   reloadSoundBuffer.loadFromFile("Assets/Audio/reload.wav");
   hurtSoundBuffer.loadFromFile("Assets/Audio/playerHurt.wav");
-  footstepsSoundBuffer.loadFromFile("Assets/Audio/playerFootsteps.wav");
+  footstepsSoundBuffer.loadFromFile("Assets/Audio/playerFootsteps.ogg");
 
   gunShotSound.setBuffer(gunShotSoundBuffer);
   reloadSound.setBuffer(reloadSoundBuffer);
@@ -69,9 +69,6 @@ void Player::update() {
   mouseDelta = {mouseX - WINDOW.internal.getSize().x / 2.0f,
                 mouseY - WINDOW.internal.getSize().y / 2.0f};
   mouseDelta *= -mouseSenstivity;
-  //    Mouse::setPosition(Vector2i{static_cast<int>(WINDOW.internal.getSize().x
-  //    / 2.0f), static_cast<int>(WINDOW.internal.getSize().y / 2.0f)},
-  //    WINDOW.internal);
   SDL_WarpMouseInWindow(nullptr,
                         static_cast<int>(WINDOW.internal.getSize().x / 2.0f),
                         static_cast<int>(WINDOW.internal.getSize().y / 2.0f));

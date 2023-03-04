@@ -56,6 +56,7 @@ void Window::terminate()
     internal.window=nullptr;
     Mix_CloseAudio();
     Mix_Quit();
+    IMG_Quit();
     SDL_Quit();
 }
 SDL_Window* Window::WindowAdapter::getHandle(){
