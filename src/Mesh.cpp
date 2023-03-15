@@ -16,6 +16,8 @@ GLuint Mesh::VAO;
 GLuint Mesh::VBO;
 GLuint Mesh::EBO;
 GLint Mesh::attribs[NumAttribs];
+size_t Mesh::normalsOffset=0;
+size_t Mesh::texCoordsOffset=0;
 
 Mesh::Mesh(const char *path, const char *texPath)
 {
@@ -117,11 +119,27 @@ void Mesh::draw()
         glBindTexture(GL_TEXTURE_2D, texture);
     }
 
-/*FIXME    glBindVertexArray(VAO);
-    glDrawElementsBaseVertex(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void *)(offsets[INDEX_BUFFER]), baseVertex);
 
+    glEnableVertexAttribArray(attribs[POSITION_ATTRIB]);
+    if(attribs[NORMAL_ATTRIB]>-1){
+        glEnableVertexAttribArray(attribs[NORMAL_ATTRIB]);
+    }
+    glEnableVertexAttribArray(attribs[TEXTURE_ATTRIB]);
+    
+    glVertexAttribPointer(attribs[POSITION_ATTRIB], 3, GL_FLOAT, GL_FALSE, 0, 0);
+    if (attribs[NORMAL_ATTRIB]>-1)
+        glVertexAttribPointer(attribs[NORMAL_ATTRIB], 3, GL_FLOAT, GL_FALSE, 0, (void *)normalsOffset);
+    glVertexAttribPointer(attribs[TEXTURE_ATTRIB], 2, GL_FLOAT, GL_FALSE, 0, (void *)texCoordsOffset);
+    glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void *)(offsets[INDEX_BUFFER]));
+
+    glDisableVertexAttribArray(attribs[POSITION_ATTRIB]);
+    if(attribs[NORMAL_ATTRIB]>-1){
+        glDisableVertexAttribArray(attribs[NORMAL_ATTRIB]);
+    }
+    glDisableVertexAttribArray(attribs[TEXTURE_ATTRIB]);
+    
     glBindTexture(GL_TEXTURE_2D, 0);
-    assert(glGetError() == 0);*/
+    assert(glGetError() == 0);
 }
 bool Mesh::getTexture(GLuint &texture)
 {
@@ -160,7 +178,7 @@ void Mesh::constructVAO(vector<shared_ptr<Mesh>> meshes)
 {
     vector<char> vertexBuffer, indexBuffer;
     size_t vertexBufferSize = 0, indexBufferSize = 0,
-           normalsOffset = 0, texCoordsOffset = 0, indicesOffset = 0;
+           indicesOffset = 0;
     for (unsigned i = 0; i < meshes.size(); ++i)
     {
         for (unsigned j = 0; j < NumBuffers; ++j)
@@ -188,6 +206,16 @@ void Mesh::constructVAO(vector<shared_ptr<Mesh>> meshes)
 
     vertexBuffer.resize(vertexBufferSize);
     indexBuffer.resize(indexBufferSize);
+
+    
+   int indexBufferOffset=0;
+    for(unsigned i=1;i<meshes.size();++i){
+        indexBufferOffset+=meshes[i-1]->vertices.size();
+        for (unsigned j=0;j<meshes[i]->indices.size();++j){
+            meshes[i]->indices[j]+=indexBufferOffset;
+        }
+    }
+    
     for (unsigned i = 0; i < meshes.size(); ++i)
     {
         memcpy(vertexBuffer.data() + meshes[i]->offsets[VERTEX_BUFFER_POS],
@@ -200,9 +228,6 @@ void Mesh::constructVAO(vector<shared_ptr<Mesh>> meshes)
                meshes[i]->indices.data(), meshes[i]->sizes[INDEX_BUFFER]);
     }
 
-//FIXME    glGenVertexArrays(1, &VAO);
-
-//FIXME    glBindVertexArray(VAO);
 
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -211,9 +236,6 @@ void Mesh::constructVAO(vector<shared_ptr<Mesh>> meshes)
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize, indexBuffer.data(), GL_STATIC_DRAW);
-/*    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void *)normalsOffset);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void *)texCoordsOffset);*/
 
     assert(glGetError() == 0);
 

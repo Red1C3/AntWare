@@ -41,6 +41,7 @@ namespace aw
 
         static GLuint VAO, VBO, EBO;
         static GLint attribs[NumAttribs];
+        static size_t normalsOffset,texCoordsOffset;
         GLuint offsets[NumBuffers];
         GLuint sizes[NumBuffers];
         unsigned baseVertex;
