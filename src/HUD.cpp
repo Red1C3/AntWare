@@ -2,6 +2,7 @@
 #include "SDL_stdinc.h"
 #include "SDL_surface.h"
 #include "SDL_video.h"
+#include <GLES2/gl2.h>
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL_stdinc.h>
 #include<SDL2/SDL_surface.h>
@@ -27,7 +28,7 @@ Hud::Hud()
         sprintf(buffer, "./Assets/Textures/%d.png", i);
         loadTexture(buffer, digits[i]);
     }
-    createQuadVAO();
+    createQuadBuffers();
 }
 Hud &Hud::instance()
 {
@@ -107,8 +108,12 @@ void Hud::drawQuad(GLuint texture, glm::vec2 pos, glm::vec2 size, glm::vec3 colo
 
     glUniformMatrix4fv(uniformsLocations[MODEL_MAT], 1, GL_FALSE, &model[0][0]);
 
-//FIXME    glBindVertexArray(quadVAO);
-//FIXME    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
+    glEnableVertexAttribArray(positionModelAttribLocation);
+
+    glVertexAttribPointer(positionModelAttribLocation, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glDrawElements(GL_TRIANGLES,6,GL_UNSIGNED_BYTE,0);
+
+    glDisableVertexAttribArray(positionModelAttribLocation);
 }
 void Hud::drawAmmo()
 {
@@ -252,13 +257,14 @@ void Hud::setShaderProgram(GLuint program)
     glUseProgram(program);
     uniformsLocations[MODEL_MAT] = glGetUniformLocation(program, "model");
     uniformsLocations[COLOR_VEC] = glGetUniformLocation(program, "color");
+    positionModelAttribLocation=glGetAttribLocation(program,"positionModel");
     assert(glGetError() == 0);
 }
 GLuint Hud::getShaderProgram()
 {
     return shaderProgram;
 }
-void Hud::createQuadVAO()
+void Hud::createQuadBuffers()
 {
     GLfloat vertcies[] = {
         -1, -1,
@@ -268,18 +274,15 @@ void Hud::createQuadVAO()
     GLubyte indices[] = {
         1, 0, 2,
         3, 1, 2};
-/*FIXME    glGenVertexArrays(1, &quadVAO);
-    glBindVertexArray(quadVAO);
     GLuint buffers[2];
     glGenBuffers(2, buffers);
     glBindBuffer(GL_ARRAY_BUFFER, buffers[0]);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 8, vertcies, GL_STATIC_DRAW);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte) * 6, indices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(0);
-    glBindVertexArray(0);*/
     assert(glGetError() == 0);
+    quadVBO=buffers[0];
+    quadEBO=buffers[1];
 }
 static inline const Uint8* flipSurface(SDL_Surface* surface){
     SDL_LockSurface(surface);

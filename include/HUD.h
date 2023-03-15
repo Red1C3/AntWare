@@ -24,12 +24,13 @@ namespace aw
         Hud();
         GLuint shaderProgram;
         GLuint uniformsLocations[NumUniforms];
-        GLuint quadVAO; // TODO switch to point sprites
+        GLuint quadVBO,quadEBO;
         GLuint crosshair;
         GLuint digits[10];
         GLuint backSlash, plus, ammo;
         GLuint hurt;
         GLuint lose, win, loading;
+        GLuint positionModelAttribLocation;
         void drawHP();
         void drawAmmo();
         void drawHurtEffect();
@@ -38,7 +39,7 @@ namespace aw
         bool isHurting = false;
         Status status;
 
-        void createQuadVAO();
+        void createQuadBuffers();
 
     public:
         static Hud &instance();
