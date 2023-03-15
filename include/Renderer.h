@@ -1,5 +1,5 @@
 #pragma once
-#include <GL/glew.h>
+#include<GLES2/gl2.h>
 #include<helpers.h>
 #include <Window.h>
 #include <Camera.h>

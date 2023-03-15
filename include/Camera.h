@@ -1,5 +1,5 @@
 #pragma once
-#include <GL/glew.h>
+#include<GLES2/gl2.h>
 #include <Window.h>
 #include <Transform.h>
 #include <Rigidbody.h>

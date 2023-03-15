@@ -9,7 +9,7 @@
 #include <exception>
 #include <random>
 #include <rapidjson/document.h>
-#include <GL/glew.h>
+#include<GLES2/gl2.h>
 #include <Window.h>
 #include <Renderer.h>
 #include <Menu.h>

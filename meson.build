@@ -4,7 +4,7 @@ project('antware', 'cpp',
     default_options: ['warning_level=3','default_library=static'])
 
 glm_dep = dependency('glm')
-glew_dep = dependency('glew')
+gl_dep=dependency('gl')
 sdl2_dep=dependency('sdl2')
 sdl2_mixer_dep=dependency('sdl2_mixer')
 sdl2_image_dep=dependency('sdl2_image')
@@ -43,11 +43,11 @@ executable('antware', sources,
     win_subsystem: 'windows',
     override_options: ['cpp_std=c++17'],
     include_directories: ['include'],
-    dependencies: [ glew_dep, glm_dep, rapidjson_dep, assimp_dep,sdl2_dep,sdl2_mixer_dep,sdl2_image_dep])
+    dependencies: [glm_dep, rapidjson_dep, assimp_dep,sdl2_dep,sdl2_mixer_dep,sdl2_image_dep])
 elif host_machine.system() == 'linux'
 executable('antware', sources,
     override_options: ['cpp_std=c++17'],
     include_directories: ['include'],
-    dependencies: [glew_dep, glm_dep, assimp_dep,sdl2_dep,sdl2_mixer_dep,sdl2_image_dep],
+    dependencies: [gl_dep, glm_dep, assimp_dep,sdl2_dep,sdl2_mixer_dep,sdl2_image_dep],
     cpp_args:['-DDEBUG'])
 endif

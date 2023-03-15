@@ -1,5 +1,5 @@
 #pragma once
-#include <GL/glew.h>
+#include<GLES2/gl2.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 #include <SDL2/SDL_opengl.h>

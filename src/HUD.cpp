@@ -107,8 +107,8 @@ void Hud::drawQuad(GLuint texture, glm::vec2 pos, glm::vec2 size, glm::vec3 colo
 
     glUniformMatrix4fv(uniformsLocations[MODEL_MAT], 1, GL_FALSE, &model[0][0]);
 
-    glBindVertexArray(quadVAO);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
+//FIXME    glBindVertexArray(quadVAO);
+//FIXME    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_BYTE, 0);
 }
 void Hud::drawAmmo()
 {
@@ -268,7 +268,7 @@ void Hud::createQuadVAO()
     GLubyte indices[] = {
         1, 0, 2,
         3, 1, 2};
-    glGenVertexArrays(1, &quadVAO);
+/*FIXME    glGenVertexArrays(1, &quadVAO);
     glBindVertexArray(quadVAO);
     GLuint buffers[2];
     glGenBuffers(2, buffers);
@@ -278,7 +278,7 @@ void Hud::createQuadVAO()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLubyte) * 6, indices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(0);
-    glBindVertexArray(0);
+    glBindVertexArray(0);*/
     assert(glGetError() == 0);
 }
 static inline const Uint8* flipSurface(SDL_Surface* surface){

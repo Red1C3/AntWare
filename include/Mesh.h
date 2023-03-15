@@ -1,4 +1,5 @@
 #pragma once
+#include<GLES2/gl2.h>
 #include <vector>
 #include <memory>
 #include <stdexcept>
@@ -7,7 +8,6 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 #include <glm/glm.hpp>
-#include <GL/glew.h>
 #include <Material.h>
 namespace aw
 {

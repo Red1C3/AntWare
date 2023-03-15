@@ -114,11 +114,11 @@ void Mesh::draw()
         glBindTexture(GL_TEXTURE_2D, texture);
     }
 
-    glBindVertexArray(VAO);
+/*FIXME    glBindVertexArray(VAO);
     glDrawElementsBaseVertex(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void *)(offsets[INDEX_BUFFER]), baseVertex);
 
     glBindTexture(GL_TEXTURE_2D, 0);
-    assert(glGetError() == 0);
+    assert(glGetError() == 0);*/
 }
 bool Mesh::getTexture(GLuint &texture)
 {
@@ -197,9 +197,9 @@ void Mesh::constructVAO(vector<shared_ptr<Mesh>> meshes)
                meshes[i]->indices.data(), meshes[i]->sizes[INDEX_BUFFER]);
     }
 
-    glGenVertexArrays(1, &VAO);
+//FIXME    glGenVertexArrays(1, &VAO);
 
-    glBindVertexArray(VAO);
+//FIXME    glBindVertexArray(VAO);
 
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);

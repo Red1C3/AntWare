@@ -37,7 +37,6 @@ namespace aw
         void setMesh(std::shared_ptr<Mesh> mesh);
         glm::mat4 applyTransform();
         virtual void draw();
-        void drawAABB(glm::vec3 color);
         virtual void fixedUpdate(float deltaTime);
         void addChild(GameObject *gameObject);
         int getClass();

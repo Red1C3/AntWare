@@ -1,6 +1,6 @@
 #pragma once
 #define MAX_LIGHTS 20
-#include <GL/glew.h>
+#include<GLES2/gl2.h>
 #include <Transform.h>
 #include <glm/glm.hpp>
 #include <GameObject.h>
