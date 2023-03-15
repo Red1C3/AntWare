@@ -1,6 +1,7 @@
 #pragma once
 #define MAX_LIGHTS 20
 #include<GLES2/gl2.h>
+#include<map>
 #include <Transform.h>
 #include <glm/glm.hpp>
 #include <GameObject.h>
@@ -20,19 +21,19 @@ namespace aw
 		{
 			int enabled;
 			LightType type;
-			float padding0,padding1;
 			glm::vec4 ambient, diffuse, specular;
 			glm::vec3 direction;
 			float angle;
 			glm::vec3 position;
-			float padding2;
 		} lightStruct;
 
 		GameObject *parent = nullptr;
 		int index;
+		static std::map<std::string,GLuint> uniforms;
 
-		static GLuint UBO;
-
+		GLuint getUniformLocation(const char* name);
+		std::string getFormattedMember(const char* member);
+		
 	public:
 		Transform transform;
 		Light(glm::vec4 ambient, glm::vec4 diffuse, glm::vec4 specular, LightType type,
@@ -45,6 +46,6 @@ namespace aw
 		void update();
 		void toggle();
 
-		static void constructUniformBuffer(std::vector<Light> &lights);
+		static void setupIndices(std::vector<Light> &lights);
 	};
 }

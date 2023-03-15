@@ -274,7 +274,7 @@ Scene::Scene(const char *path) : camera(45.0f)
     gameObjects = parseGameObjects(json["gameobjects"].GetArray(), meshes, materials,
                                    animations, mapMinLimit, mapMaxLimit);
     lights = parseLights(json["lights"].GetArray(), gameObjects);
-    Light::constructUniformBuffer(lights);
+    Light::setupIndices(lights);
 }
 Scene::~Scene()
 {

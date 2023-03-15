@@ -33,17 +33,15 @@ uniform Material material;
 uniform vec3 observerPos;
 uniform bool shadeless; 
 
-//layout(std140) uniform Lights { LightStruct lights[MAX_LIGHTS]; }; FIXME
+uniform LightStruct lights[MAX_LIGHTS];
 
 void main() {
   vec4 texColor = texture2D(albedo, texCoordOut);
-  gl_FragColor=texColor;
-    return;
   if (shadeless) {
     gl_FragColor = texColor;
     return;
   }
-  /*color = vec4(0); FIXME
+  gl_FragColor = vec4(0);
   vec3 nWorld = normalize(normalWorld);
   for (int i = 0; i < MAX_LIGHTS; i++) {
     if (lights[i].enabled) {
@@ -55,7 +53,7 @@ void main() {
         float specFactor =
             max(pow(dot(halfWay, nWorld), material.shininess), 0.0) /
             (distance(fragWorld, observerPos) * LINEAR_ATTEN);
-        color +=
+        gl_FragColor +=
             diffuseFactor * lights[i].diffuse * material.diffuse * texColor +
             specFactor * lights[i].specular * material.specular +
             ambientFactor * lights[i].ambient * material.ambient;
@@ -70,7 +68,7 @@ void main() {
         float specFactor =
             max(pow(dot(halfWay, nWorld), material.shininess), 0.0) /
             (quadraticAtten + distance(fragWorld, observerPos) * LINEAR_ATTEN);
-        color +=
+        gl_FragColor +=
             diffuseFactor * lights[i].diffuse * material.diffuse * texColor +
             specFactor * lights[i].specular * material.specular +
             ambientFactor * lights[i].ambient * material.ambient;
@@ -88,12 +86,12 @@ void main() {
         float specFactor =
             max(pow(dot(halfWay, nWorld), material.shininess), 0.0) /
             (quadraticAtten + distance(fragWorld, observerPos) * LINEAR_ATTEN);
-        color +=
+        gl_FragColor +=
             diffuseFactor * lights[i].diffuse * material.diffuse * texColor +
             specFactor * lights[i].specular * material.specular +
             ambientFactor * lights[i].ambient * material.ambient;
       }
     }
   }
-  color.a = texColor.a * material.alpha;*/
+  gl_FragColor.a = texColor.a * material.alpha;
 }

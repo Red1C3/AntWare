@@ -1,10 +1,12 @@
+#include <GLES2/gl2.h>
+#include<sstream>
 #include <Light.h>
 #include <Renderer.h>
 using namespace aw;
 using namespace std;
 using namespace glm;
 
-GLuint Light::UBO;
+map<string,GLuint> Light::uniforms;
 Light::Light(vec4 ambient, vec4 diffuse, vec4 specular, LightType type, vec3 position, vec3 direction,
 			 float angle, GameObject *parent) : parent(parent)
 {
@@ -26,38 +28,51 @@ void Light::update()
 		tempStruct.position = parent->applyTransform() * vec4(transform.getPosition(), 1);
 		tempStruct.direction = parent->applyTransform() * vec4(lightStruct.direction, 0);
 	}
-//FIXME	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
-//FIXME	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(LightStruct) * index, sizeof(LightStruct), &tempStruct);
+	glUniform1i(getUniformLocation(getFormattedMember("enabled").c_str()),tempStruct.enabled);
+	glUniform1i(getUniformLocation(getFormattedMember("type").c_str()),tempStruct.type);
+	glUniform4fv(getUniformLocation(getFormattedMember("ambient").c_str()),1,&tempStruct.ambient.x);
+	glUniform4fv(getUniformLocation(getFormattedMember("diffuse").c_str()),1,&tempStruct.diffuse.x);
+	glUniform4fv(getUniformLocation(getFormattedMember("specular").c_str()),1,&tempStruct.specular.x);
+	glUniform3fv(getUniformLocation(getFormattedMember("direction").c_str()),1,&tempStruct.direction.x);
+	glUniform1f(getUniformLocation(getFormattedMember("angle").c_str()),tempStruct.angle);
+	glUniform3fv(getUniformLocation(getFormattedMember("position").c_str()),1,&tempStruct.position.x);
 	assert(glGetError() == 0);
 }
 void Light::toggle()
 {
 	lightStruct.enabled = !lightStruct.enabled;
-	update();
+	//update();
 }
 Light::~Light()
 {
 }
-void Light::constructUniformBuffer(vector<Light> &lights)
+void Light::setupIndices(vector<Light> &lights)
 {
-	if (lights.size() > 20)
+	if (lights.size() > MAX_LIGHTS)
 	{
-		printf("requested more lights (%li) than the specified limit, ignoring past 20 lights",
-			   lights.size());
+		printf("requested more lights (%li) than the specified limit, ignoring past %d lights",
+			   lights.size(),MAX_LIGHTS);
 	}
-	vector<char> stagingBuffer(sizeof(LightStruct) * lights.size());
 	for (unsigned i = 0; i < lights.size(); ++i)
 	{
-		memcpy(stagingBuffer.data() + i * sizeof(LightStruct),
-			   &lights[i].lightStruct, sizeof(lightStruct));
 		lights[i].index = i;
+		lights[i].update();
 	}
-/*	glGenBuffers(1, &UBO);
-	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
-	glBufferData(GL_UNIFORM_BUFFER, sizeof(LightStruct) * lights.size(),
-				 stagingBuffer.data(), GL_DYNAMIC_DRAW);
-FIXME	glBindBufferBase(GL_UNIFORM_BUFFER, 0, UBO);
-	int lightsIndex = glGetUniformBlockIndex(RENDERER.getMainShader(), "Lights");
-	glUniformBlockBinding(RENDERER.getMainShader(), lightsIndex, 0);
-	assert(glGetError() == 0);*/
+}
+
+GLuint Light::getUniformLocation(const char* name){
+	auto it=uniforms.find(name);
+	if(it==uniforms.end()){
+		GLuint location=RENDERER.getUniformLocation(name);
+		uniforms.insert({name,location});
+		return location;
+	}else{
+		return it->second;
+	}
+}
+
+string Light::getFormattedMember(const char* member){
+	stringstream s;
+	s<<"lights["<<index<<"]."<<member;	
+	return s.str();
 }
