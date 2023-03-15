@@ -26,8 +26,8 @@ void Light::update()
 		tempStruct.position = parent->applyTransform() * vec4(transform.getPosition(), 1);
 		tempStruct.direction = parent->applyTransform() * vec4(lightStruct.direction, 0);
 	}
-	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
-	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(LightStruct) * index, sizeof(LightStruct), &tempStruct);
+//FIXME	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
+//FIXME	glBufferSubData(GL_UNIFORM_BUFFER, sizeof(LightStruct) * index, sizeof(LightStruct), &tempStruct);
 	assert(glGetError() == 0);
 }
 void Light::toggle()
@@ -52,11 +52,11 @@ void Light::constructUniformBuffer(vector<Light> &lights)
 			   &lights[i].lightStruct, sizeof(lightStruct));
 		lights[i].index = i;
 	}
-	glGenBuffers(1, &UBO);
+/*	glGenBuffers(1, &UBO);
 	glBindBuffer(GL_UNIFORM_BUFFER, UBO);
 	glBufferData(GL_UNIFORM_BUFFER, sizeof(LightStruct) * lights.size(),
 				 stagingBuffer.data(), GL_DYNAMIC_DRAW);
-/*FIXME	glBindBufferBase(GL_UNIFORM_BUFFER, 0, UBO);
+FIXME	glBindBufferBase(GL_UNIFORM_BUFFER, 0, UBO);
 	int lightsIndex = glGetUniformBlockIndex(RENDERER.getMainShader(), "Lights");
 	glUniformBlockBinding(RENDERER.getMainShader(), lightsIndex, 0);
 	assert(glGetError() == 0);*/

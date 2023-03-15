@@ -217,14 +217,14 @@ void Hud::drawHP()
 }
 void Hud::drawHurtEffect()
 {
-    glColor4f(1.0f, 0.0f, 0.0f, 0.3f);
+/*FIXME    glColor4f(1.0f, 0.0f, 0.0f, 0.3f);
     glBegin(GL_QUADS);
     glVertex2f(-16, 9);
     glVertex2f(16, 9);
     glVertex2f(16, -9);
     glVertex2f(-16, -9);
     glEnd();
-    glColor3f(1, 1, 1);
+    glColor3f(1, 1, 1);*/
 }
 void Hud::setHP(unsigned hp)
 {

@@ -1,8 +1,7 @@
 #pragma once
-#include<GLES2/gl2.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
-#include <SDL2/SDL_opengl.h>
+#include<GLES2/gl2.h>
 #include <SDL2/SDL_video.h>
 #define WINDOW aw::Window::instance()
 namespace aw {
