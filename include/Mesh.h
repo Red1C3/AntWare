@@ -22,6 +22,12 @@ namespace aw
             INDEX_BUFFER,
             NumBuffers
         };
+        enum{
+          POSITION_ATTRIB,
+          NORMAL_ATTRIB,
+          TEXTURE_ATTRIB,
+          NumAttribs  
+    };
         static Assimp::Importer importer;
         bool hasTexture, hasUniformColor, hasIndices;
         std::string name;
@@ -34,6 +40,7 @@ namespace aw
         void loadTexture(const char *path);
 
         static GLuint VAO, VBO, EBO;
+        static GLint attribs[NumAttribs];
         GLuint offsets[NumBuffers];
         GLuint sizes[NumBuffers];
         unsigned baseVertex;

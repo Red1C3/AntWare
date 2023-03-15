@@ -1,5 +1,7 @@
+#include <GLES2/gl2.h>
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL_surface.h>
+#include<Renderer.h>
 #include <Mesh.h>
 using namespace aw;
 using namespace glm;
@@ -13,6 +15,7 @@ Importer Mesh::importer;
 GLuint Mesh::VAO;
 GLuint Mesh::VBO;
 GLuint Mesh::EBO;
+GLint Mesh::attribs[NumAttribs];
 
 Mesh::Mesh(const char *path, const char *texPath)
 {
@@ -208,14 +211,16 @@ void Mesh::constructVAO(vector<shared_ptr<Mesh>> meshes)
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, indexBufferSize, indexBuffer.data(), GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+/*    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void *)normalsOffset);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void *)texCoordsOffset);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, (void *)texCoordsOffset);*/
 
     assert(glGetError() == 0);
+
+    attribs[POSITION_ATTRIB]=glGetAttribLocation(RENDERER.getMainShader(),"positionModel");
+    attribs[NORMAL_ATTRIB]=glGetAttribLocation(RENDERER.getMainShader(),"normalModel");
+    attribs[TEXTURE_ATTRIB]=glGetAttribLocation(RENDERER.getMainShader(),"texCoord");
+    assert(glGetError()==0);
 }
 const string Mesh::getName(){
     return name;
