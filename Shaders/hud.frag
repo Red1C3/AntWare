@@ -1,14 +1,13 @@
-#version 300 es
+#version 100
 
 precision lowp float;
 
-layout(location = 0) out vec4 outColor0;
-in vec2 uv;
+varying vec2 uv;
 uniform vec3 color;
 uniform sampler2D albedo;
 void main() {
-  vec4 sampledColor = texture(albedo, uv);
+  vec4 sampledColor = texture2D(albedo, uv);
   if (sampledColor.a == 0.0)
     discard;
-  outColor0 = vec4(color, 1.0) * sampledColor;
+  gl_FragColor = vec4(color, 1.0) * sampledColor;
 }

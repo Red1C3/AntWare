@@ -1,6 +1,6 @@
-#version 300 es
-layout(location = 0) in vec4 positionModel;
-out vec2 uv;
+#version 100
+attribute vec4 positionModel;
+varying vec2 uv;
 const mat4 ortho = mat4(vec4(0.125, 0, 0, 0), vec4(0, 0.222222224, 0, 0),
                         vec4(0, 0, -1, 0), vec4(0, 0, 0, 1));
 uniform mat4 model;

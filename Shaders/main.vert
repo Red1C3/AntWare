@@ -1,16 +1,16 @@
-#version 300 es
+#version 100
 
-layout(location = 0) in vec3 positionModel;
-layout(location = 1) in vec3 normalModel;
-layout(location = 2) in vec2 texCoord;
-out vec2 texCoordOut;
-out vec3 normalWorld, fragWorld;
+attribute vec3 positionModel;
+attribute vec3 normalModel;
+attribute vec2 texCoord;
+varying vec2 texCoordOut;
+varying vec3 normalWorld, fragWorld;
 
-uniform mat4 VP, M;
+uniform mat4 VP, M, transformedM; //FIXME send transpose(inverse(M)) as transformedM
 
 void main() {
   fragWorld = vec3(M * vec4(positionModel, 1));
   gl_Position = VP * vec4(fragWorld, 1);
-  normalWorld = vec3(transpose(inverse(M)) * vec4(normalModel, 0));
+  normalWorld = vec3(transformedM * vec4(normalModel, 0));
   texCoordOut = texCoord;
 }

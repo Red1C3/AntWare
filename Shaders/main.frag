@@ -1,4 +1,4 @@
-#version 300 es
+#version 100
 
 precision highp int;
 precision highp float;
@@ -8,9 +8,8 @@ const float ambientFactor = 0.1;
 const float QUADRATIC_ATTEN = 0.05;
 const float LINEAR_ATTEN = 0.33;
 
-in vec2 texCoordOut;
-in vec3 normalWorld, fragWorld;
-out vec4 color;
+varying vec2 texCoordOut;
+varying vec3 normalWorld, fragWorld;
 
 struct LightStruct {
   bool enabled;
@@ -34,15 +33,15 @@ uniform Material material;
 uniform vec3 observerPos;
 uniform bool shadeless; 
 
-layout(std140) uniform Lights { LightStruct lights[MAX_LIGHTS]; };
+//layout(std140) uniform Lights { LightStruct lights[MAX_LIGHTS]; }; FIXME
 
 void main() {
-  vec4 texColor = texture(albedo, texCoordOut);
+  vec4 texColor = texture2D(albedo, texCoordOut);
   if (shadeless) {
-    color = texColor;
+    gl_FragColor = texColor;
     return;
   }
-  color = vec4(0);
+  /*color = vec4(0); FIXME
   vec3 nWorld = normalize(normalWorld);
   for (int i = 0; i < MAX_LIGHTS; i++) {
     if (lights[i].enabled) {
@@ -94,5 +93,5 @@ void main() {
       }
     }
   }
-  color.a = texColor.a * material.alpha;
+  color.a = texColor.a * material.alpha;*/
 }
