@@ -37,6 +37,8 @@ uniform bool shadeless;
 
 void main() {
   vec4 texColor = texture2D(albedo, texCoordOut);
+  gl_FragColor=texColor;
+    return;
   if (shadeless) {
     gl_FragColor = texColor;
     return;

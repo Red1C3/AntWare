@@ -1,9 +1,11 @@
+#include <GLES2/gl2.h>
 #include <GameObject.h>
+#include <glm/matrix.hpp>
 using namespace aw;
 using namespace glm;
 using namespace std;
 
-GLuint GameObject::modelLocation;
+GLuint GameObject::modelLocation,GameObject::transformedMLocation;
 GameObject::~GameObject (){}
 GameObject::GameObject(shared_ptr<Mesh> mesh, Material material, GameObject *parent, bool isStatic, int type) : meshPtr(mesh),
 																												isStatic(isStatic),
@@ -44,7 +46,9 @@ void GameObject::draw()
 {
 	material.apply();
 	transformationMat = applyTransform();
+	mat4 transformedTransformationMat=transpose(inverse(transformationMat));
 	glUniformMatrix4fv(modelLocation, 1, GL_FALSE, &transformationMat[0][0]);
+	glUniformMatrix4fv(transformedMLocation,1,GL_FALSE,&transformedTransformationMat[0][0]);
 	recalculateAABB();
 	meshPtr->draw();
 }
@@ -151,7 +155,8 @@ std::shared_ptr<Mesh> GameObject::getMesh()
 {
 	return meshPtr;
 }
-void GameObject::setModelLocation(GLuint location)
+void GameObject::setModelLocation(GLuint modelLocationParam,GLuint transformedMLocationParam)
 {
-	modelLocation = location;
+	modelLocation=modelLocationParam;
+	transformedMLocation=transformedMLocationParam;
 }

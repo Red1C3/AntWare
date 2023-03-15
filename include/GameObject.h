@@ -15,7 +15,7 @@ namespace aw
         std::vector<GameObject *> children;
         glm::mat4 transformationMat;
         int classType;
-        static GLuint modelLocation;
+        static GLuint modelLocation,transformedMLocation;
 
         void constructAABB();
         void recalculateAABB();
@@ -43,6 +43,6 @@ namespace aw
         virtual void start() = 0;
         virtual void update() = 0;
 
-        static void setModelLocation(GLuint location);
+        static void setModelLocation(GLuint modelLocation,GLuint transformedMLocation);
     };
 }
