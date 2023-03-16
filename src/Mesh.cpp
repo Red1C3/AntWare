@@ -12,7 +12,6 @@ using namespace Assimp;
 static inline const Uint8* flipSurface(SDL_Surface*);
 
 Importer Mesh::importer;
-GLuint Mesh::VAO;
 GLuint Mesh::VBO;
 GLuint Mesh::EBO;
 GLint Mesh::attribs[NumAttribs];
@@ -256,4 +255,10 @@ static inline const Uint8* flipSurface(SDL_Surface* surface){
     }
     SDL_UnlockSurface(surface);
     return flippedPixels;
+}
+GLuint Mesh::getEBO(){
+    return EBO;
+}
+GLuint Mesh::getVBO(){
+    return VBO;
 }

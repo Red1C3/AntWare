@@ -39,7 +39,7 @@ namespace aw
         glm::vec4 uniformColor;
         void loadTexture(const char *path);
 
-        static GLuint VAO, VBO, EBO;
+        static GLuint VBO, EBO;
         static GLint attribs[NumAttribs];
         static size_t normalsOffset,texCoordsOffset;
         GLuint offsets[NumBuffers];
@@ -59,5 +59,7 @@ namespace aw
         const std::string getName();
         static int createTexture(const char *path);
         static void constructVAO(std::vector<std::shared_ptr<Mesh>> meshes);
+        static GLuint getVBO();
+        static GLuint getEBO();
     };
 }

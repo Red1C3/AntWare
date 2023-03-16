@@ -1,3 +1,4 @@
+#include <GLES2/gl2.h>
 #include <Renderer.h>
 using namespace aw;
 using namespace std;
@@ -36,6 +37,8 @@ void Renderer::renderScene(Scene *scene)
         scene->lights[i].update();
     }
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glBindBuffer(GL_ARRAY_BUFFER,Mesh::getVBO());
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,Mesh::getEBO());
     glUniform1i(shadelessLocation, 1);
     scene->skybox.draw();
     glUniform1i(shadelessLocation, 0);
@@ -57,7 +60,6 @@ void Renderer::renderScene(Scene *scene)
     glUniform1i(shadelessLocation, 1);
     scene->gameObjects[1]->draw();
     glUniform1i(shadelessLocation, 0);
-
     HUD.draw();
     assert(glGetError() == 0);
     WINDOW.internal.display();

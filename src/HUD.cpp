@@ -38,6 +38,8 @@ Hud &Hud::instance()
 void Hud::draw()
 {
     glUseProgram(shaderProgram);
+    glBindBuffer(GL_ARRAY_BUFFER,quadVBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,quadEBO);
     glDisable(GL_DEPTH_TEST);
     // Draw here
     if (status == ONGOING)
