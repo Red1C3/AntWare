@@ -46,7 +46,7 @@ sudo pip3 install meson
 ### Installing Dependnecies:
 
 ```
-sudo apt install libsdl2-dev libglew-dev libglm-dev libassimp-dev librapidjson-dev
+sudo apt install libsdl2-dev libsdl2_image-dev libsdl2_mixer-dev libglew-dev libglm-dev libassimp-dev librapidjson-dev
 ```
 
 ### Building with Meson :
