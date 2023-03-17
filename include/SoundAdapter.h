@@ -1,10 +1,14 @@
 #pragma once
+#ifndef NOSOUND
 #include <SDL2/SDL_mixer.h>
+#endif
 #include <SoundBufferAdapter.h>
 namespace aw {
 
 class SoundAdapter {
+  #ifndef NOSOUND
   Mix_Chunk *chunk = nullptr;
+  #endif
   bool loop = false;
   int channel=-2;
 

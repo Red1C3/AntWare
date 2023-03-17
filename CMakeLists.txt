@@ -2,6 +2,12 @@ cmake_minimum_required(VERSION 3.26)
 
 project('antware')
 
+option(NOSOUND "Disables Sound" OFF)
+
+if(NOSOUND)
+  add_definitions(-DNOSOUND)
+endif(NOSOUND)
+
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
@@ -11,9 +17,12 @@ link_libraries(
   GLEW
   SDL2
   SDL2_image
-  SDL2_mixer
   assimp
 )
+
+if(NOT NOSOUND)
+  link_libraries(SDL2_mixer)
+endif(NOT NOSOUND)
 
 add_executable(AntWare ${sources})
 

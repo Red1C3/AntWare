@@ -1,7 +1,9 @@
 #pragma once
 #include <GL/glew.h>
 #include <SDL2/SDL.h>
+#ifndef NOSOUND
 #include <SDL2/SDL_mixer.h>
+#endif
 #include <SDL2/SDL_opengl.h>
 #include <SDL2/SDL_video.h>
 #define WINDOW aw::Window::instance()

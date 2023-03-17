@@ -18,7 +18,8 @@
 - Make the `antware` repository your working directory.
 
 ### Disabling Sound
-Add ```add_project_arguments('-DNOSOUND', language : 'cpp')``` to meson.build script
+- Add ```add_project_arguments('-DNOSOUND', language : 'cpp')``` to meson.build script
+- For CMake check out below in ```Building with CMake```
 
 ### Building for development (`debug`)
 
@@ -67,7 +68,7 @@ Place your settings file in your cwd.
 ```
 mkdir build
 cd build
-cmake ..
+cmake .. # (Without sounds) cmake -DNOSOUND ..
 make
 ```
 After these steps you should have an executable named ``AntWare`` within your build directory, ready to execute with default settings.

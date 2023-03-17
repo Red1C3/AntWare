@@ -1,5 +1,7 @@
 #pragma once
+#ifndef NOSOUND
 #include<SDL2/SDL_mixer.h>
+#endif
 #include<string>
 #include <vector>
 #include<MusicAdapter.h>

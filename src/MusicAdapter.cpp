@@ -1,5 +1,7 @@
 #include <MusicAdapter.h>
+#ifndef NOSOUND
 #include <SDL2/SDL_mixer.h>
+#endif
 #include <assert.h>
 
 using namespace aw;
