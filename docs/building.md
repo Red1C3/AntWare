@@ -62,3 +62,13 @@ Make a copy of ``default_settings.json`` and modify it for your settings.
 Rename your settings file to ``settings.json``.
 
 Place your settings file in your cwd.
+
+### Building with CMake:
+```
+mkdir build
+cd build
+cmake ..
+make
+```
+After these steps you should have an executable named ``AntWare`` within your build directory, ready to execute with default settings.
+
