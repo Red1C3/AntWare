@@ -14,10 +14,17 @@ Window &Window::instance() {
   return window;
 }
 void Window::init(int height, int width) {
-  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
+#ifdef NOSOUND
+  if (SDL_Init(SDL_INIT_VIDEO) < 0) {
     printf("Failed to init SDL_Video, err: %s", SDL_GetError());
     assert(0);
   }
+#else
+  if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) < 0) {
+    printf("Failed to init SDL_Video+Audio, err: %s", SDL_GetError());
+    assert(0);
+  }
+#endif
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
