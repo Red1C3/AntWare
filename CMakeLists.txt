@@ -20,7 +20,7 @@ set(VITA_VERSION "01.00")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++17")
 set(CMAKE_PREFIX_PATH ${VITASDK}/arm-vita-eabi/lib/cmake/)
-add_definitions(-D__VITA__)
+add_definitions(-DVITA)
 option(NOSOUND "Disables Sound" OFF)
 
 if(NOSOUND)

@@ -1,5 +1,5 @@
 #include <App.h>
-#ifdef __VITA__
+#ifdef VITA
 #include <psp2/kernel/processmgr.h>
 #endif
 
@@ -11,14 +11,14 @@ int main(int argc, char **argv) {
     if (APP.init(argc, argv)) {
       APP.loop();
     }
-#ifdef __VITA__
+#ifdef VITA
     sceKernelExitProcess(0);
 #endif
     return 0;
   } catch (const exception &err) {
     printf("An exception occured: %s", err.what());
   }
-#ifdef __VITA__
+#ifdef VITA
   sceKernelExitProcess(0);
 #endif
 }

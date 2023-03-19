@@ -19,13 +19,16 @@ void Renderer::init()
     glEnable(GL_CULL_FACE);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     assert(glGetError()==0);
-
-    mainShader = loadShaderProgram("Shaders/main.vert", "Shaders/main.frag");
+    printf("Inited OpenGL defaults\n");
+    /*mainShader = loadShaderProgram("Shaders/main.vert", "Shaders/main.frag");
+    printf("Loaded main shader");
     glUseProgram(mainShader);
     shadelessLocation = getUniformLocation("shadeless");
     glUniform1i(shadelessLocation,0);
-    glUseProgram(0);
+    printf("Sat shadeless value");
+    glUseProgram(0);*/
     HUD.setShaderProgram(loadShaderProgram("Shaders/hud.vert", "Shaders/hud.frag"));
+    printf("Loaded HUD shader");
     assert(glGetError() == 0);
 }
 void Renderer::renderScene(Scene *scene)
@@ -117,7 +120,7 @@ GLuint Renderer::loadShaderProgram(const char *vertexShaderPath, const char *fra
     infoLog.push_back('\0');
     printf("%s", infoLog.data());
 #endif
-    #ifndef __VITA__
+    #ifndef VITA
     glDetachShader(program, vertexShader);
     glDetachShader(program, fragmentShader);
     #endif

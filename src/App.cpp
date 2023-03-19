@@ -14,8 +14,10 @@ App &App::instance()
 }
 bool App::init(int argc, char **argv)
 {
+    printf("Starting AntWare\n");
     srand(time(nullptr));
     readSettingsFile();
+    printf("Read settings\n");
     WINDOW.init(settings.resHeight, settings.resWidth);
     RENDERER.init();
     MENU.init(settings.levels, settings.levelsLabels);

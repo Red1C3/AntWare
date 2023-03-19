@@ -25,6 +25,7 @@ void Menu::init(vector<string> levels, vector<string> labels)
     menuNavigateSound.setBuffer(menuNavigateSoundBuffer);
     menuPickSound.setBuffer(menuPickSoundBuffer);
     this->levels = levels;
+    printf("Loading textures...\n");
     for (unsigned i = 0; i < labels.size(); ++i)
     {
         GLuint tex;
@@ -34,6 +35,7 @@ void Menu::init(vector<string> levels, vector<string> labels)
     Hud::loadTexture("Assets/Textures/Main Menu BG.png", backgroundTex);
     Hud::loadTexture("Assets/Textures/Game Label.png", gameLabelTex);
     Hud::loadTexture("Assets/Textures/Credits.png", creditsTex);
+    printf("Loaded textures\n");
 }
 int Menu::loop()
 {
@@ -41,6 +43,7 @@ int Menu::loop()
     glUseProgram(HUD.getShaderProgram());
 
     bool isSelecting = true;
+    printf("Starting menu loop\n");
     while (isSelecting)
     {
         SDL_Event event;
