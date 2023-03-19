@@ -1,4 +1,6 @@
+#ifndef NOSOUND
 #include <SDL2/SDL_mixer.h>
+#endif
 #include <SoundAdapter.h>
 #include <assert.h>
 using namespace aw;
@@ -55,6 +57,8 @@ SoundAdapter::Status SoundAdapter::getStatus() {
   } else {
     return PAUSED;
   }
+#else
+  return PLAYING;
 #endif
 }
 void SoundAdapter::pause() {

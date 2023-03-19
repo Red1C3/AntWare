@@ -1,8 +1,12 @@
 #pragma once
+#ifndef NOSOUND
 #include <SDL2/SDL_mixer.h>
+#endif
 namespace aw {
 class MusicAdapter {
+  #ifndef NOSOUND
   Mix_Music *music = nullptr;
+  #endif 
 
 private:
   bool loop = true;

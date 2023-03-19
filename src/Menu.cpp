@@ -1,6 +1,8 @@
 #include<SDL2/SDL_events.h>
 #include<SDL2/SDL_keycode.h>
+#ifndef NOSOUND
 #include<SDL2/SDL_mixer.h>
+#endif
 #include<SDL2/SDL_scancode.h>
 #include <Menu.h>
 using namespace aw;

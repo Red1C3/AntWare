@@ -18,7 +18,8 @@
 - Make the `antware` repository your working directory.
 
 ### Disabling Sound
-Add ```add_project_arguments('-DNOSOUND', language : 'cpp')``` to meson.build script
+- Add ```add_project_arguments('-DNOSOUND', language : 'cpp')``` to meson.build script
+- For CMake check out below in ```Building with CMake```
 
 ### Building for development (`debug`)
 
@@ -46,7 +47,7 @@ sudo pip3 install meson
 ### Installing Dependnecies:
 
 ```
-sudo apt install libsdl2-dev libglew-dev libglm-dev libassimp-dev librapidjson-dev
+sudo apt install libsdl2-dev libsdl2_image-dev libsdl2_mixer-dev libglew-dev libglm-dev libassimp-dev librapidjson-dev
 ```
 
 ### Building with Meson :
@@ -62,3 +63,13 @@ Make a copy of ``default_settings.json`` and modify it for your settings.
 Rename your settings file to ``settings.json``.
 
 Place your settings file in your cwd.
+
+### Building with CMake:
+```
+mkdir build
+cd build
+cmake .. # (Without sounds) cmake -DNOSOUND ..
+make
+```
+After these steps you should have an executable named ``AntWare`` within your build directory, ready to execute with default settings.
+

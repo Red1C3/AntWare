@@ -1,9 +1,11 @@
-#include<SDL2/SDL_events.h>
-#include<SDL2/SDL_keyboard.h>
-#include<SDL2/SDL_mixer.h>
-#include<SDL2/SDL_mouse.h>
-#include<SoundAdapter.h>
 #include <Player.h>
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keyboard.h>
+#ifndef NOSOUND
+#include <SDL2/SDL_mixer.h>
+#endif
+#include <SDL2/SDL_mouse.h>
+#include <SoundAdapter.h>
 using namespace aw;
 using namespace std;
 using namespace glm;
@@ -197,4 +199,8 @@ void Player::reloadAnim(float deltaTime) {
   }
 }
 bool Player::isDead() { return hp <= 0.0f; }
-void Player::killSound() { Mix_HaltChannel(-1); }
+void Player::killSound() {
+#ifndef NOSOUND
+  Mix_HaltChannel(-1);
+#endif
+}

@@ -21,7 +21,11 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 set(CMAKE_PREFIX_PATH ${VITASDK}/arm-vita-eabi/lib/cmake/)
 add_definitions(-D__VITA__)
-add_definitions(-DNOSOUND)
+option(NOSOUND "Disables Sound" OFF)
+
+if(NOSOUND)
+  add_definitions(-DNOSOUND)
+endif(NOSOUND)
 
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
@@ -35,10 +39,14 @@ find_package(libjpeg-turbo REQUIRED)
 
 add_executable(${PROJECT_NAME} ${sources})
 
+if(NOT NOSOUND)
+  target_link_libraries(${PROJECT_NAME} SDL2_mixer)
+endif(NOT NOSOUND)
+
+
 target_link_libraries(${PROJECT_NAME}
   SDL2::SDL2
   SDL2_image
-  SDL2_mixer
   libjpeg-turbo::jpeg-static
   assimp::assimp
   vitaGL
@@ -87,3 +95,4 @@ vita_create_vpk(${PROJECT_NAME}.vpk ${VITA_TITLEID} ${PROJECT_NAME}.self
   FILE ${PROJECT_SOURCE_DIR}/Shaders Shaders
   FILE ${PROJECT_SOURCE_DIR}/Assets Assets
 )
+
