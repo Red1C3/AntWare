@@ -2,13 +2,14 @@
 #ifdef __VITA__
 #include <psp2/kernel/processmgr.h>
 #endif
+
+
 using namespace std;
 using namespace aw;
 int main(int argc, char **argv) {
   try {
     if (APP.init(argc, argv)) {
       APP.loop();
-      APP.terminate();
     }
 #ifdef __VITA__
     sceKernelExitProcess(0);
