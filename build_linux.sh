@@ -1,4 +1,4 @@
 #!/bin/bash
 
-meson setup builddir
-ninja -Cbuilddir && ./builddir/antware
+meson setup build
+ninja -Cbuild && ./build/antware
