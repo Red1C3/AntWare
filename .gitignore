@@ -83,3 +83,7 @@ scripts
 
 # Renderdoc Captures
 *.cap
+
+#included libs
+glm
+rapidjson

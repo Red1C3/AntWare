@@ -117,8 +117,10 @@ GLuint Renderer::loadShaderProgram(const char *vertexShaderPath, const char *fra
     infoLog.push_back('\0');
     printf("%s", infoLog.data());
 #endif
+    #ifndef __VITA__
     glDetachShader(program, vertexShader);
     glDetachShader(program, fragmentShader);
+    #endif
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
 

@@ -19,18 +19,36 @@ set(VITA_VERSION "01.00")
 
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=gnu11")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+set(CMAKE_PREFIX_PATH ${VITASDK}/arm-vita-eabi/lib/cmake/)
+add_definitions(-D__VITA__)
+add_definitions(-DNOSOUND)
 
 file(GLOB sources ${PROJECT_SOURCE_DIR}/src/*.cpp)
 
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
+find_package(assimp REQUIRED)
+
+find_package(SDL2 REQUIRED)
+
+find_package(libjpeg-turbo REQUIRED)
+
 add_executable(${PROJECT_NAME} ${sources})
 
 target_link_libraries(${PROJECT_NAME}
-  SDL2
+  SDL2::SDL2
   SDL2_image
-  assimp
+  SDL2_mixer
+  libjpeg-turbo::jpeg-static
+  assimp::assimp
   vitaGL
+  png
+  webp
+  pthread
+  FLAC
+  mikmod
+  modplug
+  mpg123
   SceShaccCgExt
   mathneon
   vitashark

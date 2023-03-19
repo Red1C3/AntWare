@@ -1,7 +1,3 @@
-#include "SDL_image.h"
-#include "SDL_stdinc.h"
-#include "SDL_surface.h"
-#include "SDL_video.h"
 #include <GLES2/gl2.h>
 #include<SDL2/SDL_image.h>
 #include<SDL2/SDL_stdinc.h>
