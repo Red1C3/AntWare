@@ -1,8 +1,8 @@
 {
     "Note": "DO NOT MODIFY ME UNLESS YOU ARE ADDING A NEW FIELD OR CHANGING THE DEFAULTS",
     "resolution": {
-        "height": 720,
-        "width": 1280
+        "height": 544,
+        "width": 960
     },
     "levels": [
         [
